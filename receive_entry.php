@@ -52,38 +52,38 @@
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
-                                <label>Work Order ID</label>
+                                <label>LC No</label>
                                 <input type="text" name="purchase_id" id="purchase_id" class="form-control">
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
-                                <label>Work Order Date</label>
+                                <label>LC Date</label>
                                 <input type="text" autocomplete="off" name="Purchase_date" id="Purchase_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">	
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
-                                <label for="id">Supplier Challan No</label>
+                                <label for="id">PKG No</label>
                                 <input type="text" name="challan_no" id="challan_no" class="form-control">
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
-                                <label for="id">Challan Date</label>
+                                <label for="id">PKG Date</label>
                                 <input type="text" autocomplete="off" name="challan_date" id="challan_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
-                                <label for="id">Requisition No.</label>
+                                <label for="id">BL No.</label>
                                 <input type="text" name="requisition_no" id="requisition_no" class="form-control">
 								<!-- <input type="text" id="requisition_no" name="requisition_no" class="form-control" onkeypress="return event.charCode > 47 && event.charCode < 58;" pattern="[0-9]{5}" required></input> -->
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
-                                <label for="id">Requisition Date</label>
+                                <label for="id">BL Date</label>
                                 <input type="text" autocomplete="off" name="requisition_date" id="requisition_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
                             </div>
                         </div>
@@ -114,24 +114,6 @@
                         </div>
 						<div class="col-xs-2">
                             <div class="form-group">
-                                <label>Project</label>
-                                <select class="form-control" id="project_id" name="project_id" readonly >
-									<?php
-									$projectsData = getTableDataByTableName('projects');
-									;
-									if (isset($projectsData) && !empty($projectsData)) {
-										foreach ($projectsData as $data) {
-											?>
-											<option value="<?php echo $data['id']; ?>"><?php echo $data['name']; ?></option>
-											<?php
-										}
-									}
-									?>
-								</select>
-                            </div>
-                        </div>
-						<div class="col-xs-2">
-                            <div class="form-group">
                                 <label>Warehouse</label>
 								
 								<?php  
@@ -149,10 +131,10 @@
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dynamic_field">
                                 <thead>
-									<th>Material Name<span class="reqfield"> ***</span></th>
+									<th width="30%">Material Name<span class="reqfield"> ***</span></th>
 									<th>Material ID</th>
 									<th width="10%">Unit</th>
-									<th width="10%">Brand</th>
+									<th width="10%">Country</th>
 									<th>Qty<span class="reqfield"> ***</span></th>
 									<th>Unit Price<span class="reqfield"> ***</span></th>
 									<th>Total Amount</th>
@@ -192,18 +174,9 @@
                                             </select>
                                         </td>
                                         <td>
-                                            <select class="form-control material_select_2" id="brand0" name="brand[]">
+                                            <select class="form-control material_select_2" id="country0" name="country[]">
                                                 <option value="">Select</option>
-                                                <?php
-                                                $brandData = getmaterialbrand();
-                                                if (isset($brandData) && !empty($brandData)) {
-                                                    foreach ($brandData as $data) {
-                                                        ?>
-                                                        <option value="<?php echo $data['id']; ?>"><?php echo $data['brand_name']; ?></option>
-                                                        <?php
-                                                    }
-                                                }
-                                                ?>
+                                                <option value="Indonesia">Indonesia</option>
                                             </select>
                                         </td>
                                         <td><input type="text" name="quantity[]" id="quantity0" onchange="sum(0)" class="form-control" required></td>
@@ -246,11 +219,7 @@
 								
                             </div>
                         </div>
-						<div class="col-xs-6">
-                            <div style="border:1px solid gray;height:150px;width:150px;">
-								<img id="output" height="150px" width="150px"/>
-                            </div>
-                        </div>
+						<div class="col-xs-6"></div>
                     </div>
                     <div class="row" style="">
                         <div class="col-xs-12">
@@ -291,13 +260,7 @@
                                                     foreach ($projectsData as $data) {
                                                         ?><option value="<?php echo $data['id']; ?>"><?php echo $data['unit_name']; ?></option><?php }
                                                 }
-                                                ?></select></td><td><select class="form-control material_select_2" id="brand' + i + '" name="brand[]' + i + '" ><option value="">Select</option><?php
-                                                $projectsData = getmaterialbrand();
-                                                if (isset($projectsData) && !empty($projectsData)) {
-                                                    foreach ($projectsData as $data) {
-                                                        ?><option value="<?php echo $data['brand_name']; ?>"><?php echo $data['brand_name']; ?></option><?php }
-                                                }
-                                                ?></select></td><td><input type="text" name="quantity[]" id="quantity' + i + '" onchange="sum(0)" class="form-control" required></td><td><input type="text" name="unit_price[]" id="unit_price' + i + '" onchange="sum(0)" class="form-control" required></td><td><input type="text" name="totalamount[]" id="sum' + i + '" class="form-control"></td><td><button type="button" name="remove" id="' + i + '" class="btn btn_remove" style="background-color:#f26522;color:#ffffff;">X</button></td></tr>');
+                                                ?></select></td><td><select class="form-control material_select_2" id="country' + i + '" name="country[]' + i + '" ><option value="">Select</option><option value="Indonesia">Indonesia</option></select></td><td><input type="text" name="quantity[]" id="quantity' + i + '" onchange="sum(0)" class="form-control" required></td><td><input type="text" name="unit_price[]" id="unit_price' + i + '" onchange="sum(0)" class="form-control" required></td><td><input type="text" name="totalamount[]" id="sum' + i + '" class="form-control"></td><td><button type="button" name="remove" id="' + i + '" class="btn btn_remove" style="background-color:#f26522;color:#ffffff;">X</button></td></tr>');
 												$(".material_select_2").select2();
             $('#quantity' + i + ', #unit_price' + i).change(function () {
                 sum(i)
