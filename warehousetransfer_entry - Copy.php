@@ -38,9 +38,9 @@
 										$result = mysqli_query($conn, $sql);
 										$row=mysqli_fetch_array($result);
 										$short_name = $row['short_name'];
-										$transferCode= 'WT-'.$short_name;
+										$transferCode= 'WLS-'.$short_name;
 									} else{
-										$transferCode= 'WT-CW';
+										$transferCode= 'WLS-CW';
 									}
 								?>
 								<input type="text" name="transfer_id" id="transfer_id" class="form-control" readonly="readonly" value="<?php echo getDefaultCategoryCodeByWarehouseT('inv_transfermaster', 'transfer_id', '03d', '001', $transferCode) ?>">
@@ -52,7 +52,7 @@
 						<?php if($_SESSION['logged']['user_type'] == 'whm') { ?>
 						<div class="col-xs-3">
 							<div class="form-group">
-									<label>From Warehouse</label>
+									<label>From Site</label>
 									
 									<?php  
 										$warehouse_id = $_SESSION['logged']['warehouse_id'];								
@@ -68,7 +68,7 @@
 						
 						<div class="col-xs-3">
 							<div class="form-group">
-								<label for="id">From Warehouse </label>
+								<label for="id">From Site </label>
 								<select class="form-control" id="from_warehouse" name="from_warehouse" required>
 									<option value="">Select</option>
 									<?php
@@ -92,7 +92,7 @@
 						
 						<div class="col-xs-3">
 							<div class="form-group">
-								<label for="id">To Warehouse </label>
+								<label for="id">To Site </label>
 								<select class="form-control" id="to_warehouse" name="to_warehouse" required>
 									<option value="">Select</option>
 									<?php

@@ -53,41 +53,41 @@
                         <div class="col-xs-2">
                             <div class="form-group">
                                 <label>LC No</label>
-                                <input type="text" name="purchase_id" id="purchase_id" class="form-control">
+                                <input type="text" name="lc_no" id="purchase_id" class="form-control">
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
                                 <label>LC Date</label>
-                                <input type="text" autocomplete="off" name="Purchase_date" id="Purchase_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">	
+                                <input type="text" autocomplete="off" name="lc_date" id="requisition_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">	
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
                                 <label for="id">PKG No</label>
-                                <input type="text" name="challan_no" id="challan_no" class="form-control">
+                                <input type="text" name="pkg_no" id="pkg_no" class="form-control">
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
                                 <label for="id">PKG Date</label>
-                                <input type="text" autocomplete="off" name="challan_date" id="challan_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
+                                <input type="text" autocomplete="off" name="pkg_date" id="challan_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
                                 <label for="id">BL No.</label>
-                                <input type="text" name="requisition_no" id="requisition_no" class="form-control">
+                                <input type="text" name="bl_no" id="requisition_no" class="form-control">
 								<!-- <input type="text" id="requisition_no" name="requisition_no" class="form-control" onkeypress="return event.charCode > 47 && event.charCode < 58;" pattern="[0-9]{5}" required></input> -->
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
                                 <label for="id">BL Date</label>
-                                <input type="text" autocomplete="off" name="requisition_date" id="requisition_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
+                                <input type="text" autocomplete="off" name="bl_date" id="bl_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
                             </div>
                         </div>
-                        <div class="col-xs-2">
+                        <div class="col-xs-4">
                             <div class="form-group">
                                 <label for="id">Supplier</label><span class="reqfield"> ***required</span>
                                 <select class="form-control material_select_2" id="supplier_name" name="supplier_name" required onchange="getItemCodeByParam(this.value, 'suppliers', 'code', 'supplier_id');">
@@ -121,6 +121,8 @@
 									$dataresult =   getDataRowByTableAndId('inv_warehosueinfo', $warehouse_id);
 								?>
 								<input type="text" class="form-control" readonly="readonly" value="<?php echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : ''); ?>">
+								
+								<input type="hidden" name="port_id" id="port_id" class="form-control" readonly="readonly" value="<?php echo $_SESSION['logged']['port_id']; ?>">
 								
 								<input type="hidden" name="warehouse_id" id="warehouse_id" class="form-control" readonly="readonly" value="<?php echo $_SESSION['logged']['warehouse_id']; ?>">
 								
@@ -179,9 +181,9 @@
                                                 <option value="Indonesia">Indonesia</option>
                                             </select>
                                         </td>
-                                        <td><input type="text" name="quantity[]" id="quantity0" onchange="sum(0)" class="form-control" required></td>
-                                        <td><input type="text" name="unit_price[]" id="unit_price0" onchange="sum(0)" class="form-control" required></td>
-                                        <td><input type="text" name="totalamount[]" id="sum0" class="form-control"></td>
+                                        <td><input type="number" step=".01" name="quantity[]" id="quantity0" onkeyup="sum(0)" class="form-control" required></td>
+                                        <td><input type="number" step=".01" name="unit_price[]" id="unit_price0" onkeyup="sum(0)" class="form-control" required></td>
+                                        <td><input type="text" step=".01" name="totalamount[]" id="sum0" class="form-control" readonly ></td>
                                         <td><button type="button" name="add" id="add" class="btn" style="background-color:#2e3192;color:#ffffff;">+</button></td>
                                     </tr>
                                 </tbody>
@@ -260,7 +262,7 @@
                                                     foreach ($projectsData as $data) {
                                                         ?><option value="<?php echo $data['id']; ?>"><?php echo $data['unit_name']; ?></option><?php }
                                                 }
-                                                ?></select></td><td><select class="form-control material_select_2" id="country' + i + '" name="country[]' + i + '" ><option value="">Select</option><option value="Indonesia">Indonesia</option></select></td><td><input type="text" name="quantity[]" id="quantity' + i + '" onchange="sum(0)" class="form-control" required></td><td><input type="text" name="unit_price[]" id="unit_price' + i + '" onchange="sum(0)" class="form-control" required></td><td><input type="text" name="totalamount[]" id="sum' + i + '" class="form-control"></td><td><button type="button" name="remove" id="' + i + '" class="btn btn_remove" style="background-color:#f26522;color:#ffffff;">X</button></td></tr>');
+                                                ?></select></td><td><select class="form-control material_select_2" id="country' + i + '" name="country[]' + i + '" ><option value="">Select</option><option value="Indonesia">Indonesia</option></select></td><td><input type="number" step=".01" name="quantity[]" id="quantity' + i + '" onkeyup="sum(' + i + ')" class="form-control" required></td><td><input type="number" step=".01" name="unit_price[]" id="unit_price' + i + '" onkeyup="sum(' + i + ')" class="form-control" required></td><td><input type="text" step=".01" name="totalamount[]" id="sum' + i + '" class="form-control" readonly ></td><td><button type="button" name="remove" id="' + i + '" class="btn btn_remove" style="background-color:#f26522;color:#ffffff;">X</button></td></tr>');
 												$(".material_select_2").select2();
             $('#quantity' + i + ', #unit_price' + i).change(function () {
                 sum(i)
@@ -284,7 +286,7 @@
         var unit_price1 = document.getElementById('unit_price' + i).value;
         var result = parseFloat(quantity1) * parseFloat(unit_price1);
         if (!isNaN(result)) {
-            document.getElementById('sum' + i).value = result;
+            document.getElementById('sum' + i).value = result.toFixed(2);
         }
         sum_total();
     }
@@ -324,6 +326,17 @@
 <script>
     $(function () {
         $("#requisition_date").datepicker({
+            inline: true,
+            dateFormat: "yy-mm-dd",
+            yearRange: "-50:+10",
+            changeYear: true,
+            changeMonth: true
+        });
+    });
+</script>
+<script>
+    $(function () {
+        $("#bl_date").datepicker({
             inline: true,
             dateFormat: "yy-mm-dd",
             yearRange: "-50:+10",

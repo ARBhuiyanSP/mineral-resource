@@ -22,6 +22,28 @@ if (isset($_POST['project_submit']) && !empty($_POST['project_submit'])) {
 		exit();
 }
 
+/*******************************************************************************
+ * The following code will
+ * Insert Port Info at ports table
+ */
+if (isset($_POST['port_submit']) && !empty($_POST['port_submit'])) {
+
+        
+        /*
+         *  Insert Data Into inv_receivedetail Table:
+        */ 
+        $code		= $_POST['code'];
+        $name		= $_POST['name'];
+        $incharge	= $_POST['incharge'];
+        $address	= $_POST['address'];     
+               
+        $query = "INSERT INTO `ports` (`code`,`name`,`incharge`,`address`) VALUES ('$code','$name','$incharge','$address')";
+        $conn->query($query);
+        
+		$_SESSION['success']    =   "Port Entry process have been successfully completed.";
+		header("location: port_entry.php");
+		exit();
+}
 
 /*******************************************************************************
  * The following code will

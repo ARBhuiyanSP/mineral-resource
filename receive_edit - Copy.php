@@ -44,41 +44,41 @@ if (isset($_GET['edit_id']) && !empty($_GET['edit_id'])) {
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
-                                <label>LC No</label>
-                                <input type="text" name="lc_no" id="lc_no" class="form-control" value="<?php echo (isset($receiveData->lc_no) && !empty($receiveData->lc_no) ? $receiveData->lc_no : ''); ?>">
+                                <label>Purchase ID</label>
+                                <input type="text" name="purchase_id" id="purchase_id" class="form-control" value="<?php echo (isset($receiveData->purchase_id) && !empty($receiveData->purchase_id) ? $receiveData->purchase_id : ''); ?>">
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
-                                <label>LC Date</label>
-                                <input type="text" autocomplete="off" name="lc_date" id="requisition_date" class="form-control datepicker" value="<?php echo (isset($receiveData->lc_date) && !empty($receiveData->lc_date) ? date('Y-m-d', strtotime($receiveData->lc_date)) : ''); ?>">	
+                                <label>Purchase Date</label>
+                                <input type="text" autocomplete="off" name="Purchase_date" id="Purchase_date" class="form-control datepicker" value="<?php echo (isset($receiveData->mrr_date) && !empty($receiveData->mrr_date) ? date('Y-m-d', strtotime($receiveData->mrr_date)) : ''); ?>">	
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
-                                <label>PKG No</label>
-                                <input type="text" name="pkg_no" id="pkg_no" class="form-control" value="<?php echo (isset($receiveData->pkg_no) && !empty($receiveData->pkg_no) ? $receiveData->pkg_no : ''); ?>">
+                                <label for="id">Supplier Challan No</label>
+                                <input type="text" name="challan_no" id="challan_no" class="form-control" value="<?php echo (isset($receiveData->challanno) && !empty($receiveData->challanno) ? $receiveData->challanno : ''); ?>">
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
-                                <label>PKG Date</label>
-                                <input type="text" autocomplete="off" name="pkg_date" id="challan_date" class="form-control datepicker" value="<?php echo (isset($receiveData->pkg_date) && !empty($receiveData->pkg_date) ? date('Y-m-d', strtotime($receiveData->pkg_date)) : ''); ?>">	
+                                <label for="id">Challan Date</label>
+                                <input type="text" autocomplete="off" name="challan_date" id="challan_date" class="form-control datepicker" value="<?php echo (isset($receiveData->challan_date) && !empty($receiveData->challan_date) ? $receiveData->challan_date : ''); ?>">
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
-                                <label>BL No</label>
-                                <input type="text" name="bl_no" id="bl_no" class="form-control" value="<?php echo (isset($receiveData->bl_no) && !empty($receiveData->bl_no) ? $receiveData->bl_no : ''); ?>">
+                                <label for="id">Requisition No.</label>
+                                <input type="text" name="requisition_no" id="requisition_no" class="form-control" value="<?php echo (isset($receiveData->requisitionno) && !empty($receiveData->requisitionno) ? $receiveData->requisitionno : ''); ?>">
                             </div>
                         </div>
                         <div class="col-xs-2">
                             <div class="form-group">
-                                <label>BL Date</label>
-                                <input type="text" autocomplete="off" name="bl_date" id="bl_date" class="form-control datepicker" value="<?php echo (isset($receiveData->bl_date) && !empty($receiveData->bl_date) ? date('Y-m-d', strtotime($receiveData->bl_date)) : ''); ?>">	
+                                <label for="id">Requisition Date</label>
+                                <input type="text" autocomplete="off" name="requisition_date" id="requisition_date" class="form-control datepicker" value="<?php echo (isset($receiveData->requisition_date) && !empty($receiveData->requisition_date) ? $receiveData->requisition_date : ''); ?>">
                             </div>
                         </div>
-                        <div class="col-xs-4">
+                        <div class="col-xs-2">
                             <div class="form-group">
                                 <label for="id">Supplier</label>
                                 <select class="form-control" id="supplier_name" name="supplier_name" required onchange="getItemCodeByParam(this.value, 'suppliers', 'code', 'supplier_id');">
@@ -107,20 +107,42 @@ if (isset($_GET['edit_id']) && !empty($_GET['edit_id'])) {
                         </div>
 						<div class="col-xs-2">
                             <div class="form-group">
+                                <label>Project</label>
+                                <select class="form-control" id="project_id" name="project_id" readonly >
+									<?php
+									$projectsData = getTableDataByTableName('projects');
+									;
+									if (isset($projectsData) && !empty($projectsData)) {
+										foreach ($projectsData as $data) {
+											?>
+											<option value="<?php echo $data['id']; ?>" <?php if (isset($receiveData->project_id) && $receiveData->project_id == $data['code']) {
+                                        echo 'selected';
+                                    } ?>><?php echo $data['name']; ?></option>
+											<?php
+										}
+									}
+									?>
+								</select>
+                            </div>
+                        </div>
+						<div class="col-xs-2">
+                            <div class="form-group">
                                 <label>Warehouse</label>
-								
-								<?php  
-									$warehouse_id = $receiveData->warehouse_id;								
-									$dataresult =   getDataRowByTableAndId('inv_warehosueinfo', $warehouse_id);
-								?>
-								<input type="text" class="form-control" readonly="readonly" value="<?php echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : ''); ?>">
-								
-								<input type="hidden" name="port_id" id="port_id" class="form-control" readonly="readonly" value="<?php echo $receiveData->port_id; ?>">
-								
-								<input type="hidden" name="warehouse_id" id="warehouse_id" class="form-control" readonly="readonly" value="<?php echo $receiveData->warehouse_id; ?>">
-								
-								<input type="hidden" name="updated_by" id="updated_by" class="form-control" readonly="readonly" value="<?php echo $_SESSION['logged']['user_id']; ?>">
-								
+                                <select class="form-control" id="warehouse_id" name="warehouse_id" readonly>
+									<?php
+									$projectsData = getTableDataByTableName('inv_warehosueinfo');
+									;
+									if (isset($projectsData) && !empty($projectsData)) {
+										foreach ($projectsData as $data) {
+											?>
+											<option value="<?php echo $data['id']; ?>" <?php if (isset($receiveData->warehouse_id) && $receiveData->warehouse_id == $data['id']) {
+                                        echo 'selected';
+                                    } ?>><?php echo $data['name']; ?></option>
+											<?php
+										}
+									}
+									?>
+								</select>
                             </div>
                         </div>
                     </div>
@@ -128,10 +150,10 @@ if (isset($_GET['edit_id']) && !empty($_GET['edit_id'])) {
                         <div class="table-responsive">
                             <table class="table table-bordered" id="dynamic_field">
                                 <thead>
-									<th width="30%">Material Name</th>
+									<th>Material Name</th>
 									<th>Material ID</th>
 									<th width="10%">Unit</th>
-									<th width="10%">Country</th>
+									<th width="10%">Brand</th>
 									<th>Qty<span class="reqfield"> ***</span></th>
 									<th>Unit Price<span class="reqfield"> ***</span></th>
 									<th>Total Amount</th>
@@ -181,19 +203,28 @@ if (isset($_GET['edit_id']) && !empty($_GET['edit_id'])) {
                                                     </select>
                                                 </td>
                                                 <td>
-													<select class="form-control material_select_2" id="country0" name="country[]">
+													<select class="form-control material_select_2" id="brand0" name="brand[]">
 														<option value="">Select</option>
-														<option value="Indonesia" <?php if (isset($editDatas->country) && $editDatas->country == 'Indonesia') {
+														<?php
+														$brandData = getmaterialbrand();
+														if (isset($brandData) && !empty($brandData)) {
+															foreach ($brandData as $data) {
+																?>
+																<option value="<?php echo $data['id']; ?>"<?php if (isset($editDatas->brand_id) && $editDatas->brand_id == $data['id']) {
                                                     echo 'selected';
-                                                } ?>>Indonesia</option>
+                                                } ?>><?php echo $data['brand_name']; ?></option>
+																<?php
+															}
+														}
+														?>
 													</select>
 												</td>
 												
 												
 												
-                                                <td><input type="number" step=".01" name="quantity[]" id="quantity<?php echo $key; ?>" onkeyup="sum(<?php echo $key; ?>)" class="form-control" value="<?php echo (isset($editDatas->receive_qty) && !empty($editDatas->receive_qty) ? $editDatas->receive_qty : ''); ?>"></td>
-                                                <td><input type="number" step=".01" name="unit_price[]" id="unit_price<?php echo $key; ?>" onkeyup="sum(<?php echo $key; ?>)" class="form-control" value="<?php echo (isset($editDatas->unit_price) && !empty($editDatas->unit_price) ? $editDatas->unit_price : ''); ?>"></td>
-                                                <td><input type="text" step=".01" name="totalamount[]" id="sum<?php echo $key; ?>" class="form-control" value="<?php echo (isset($editDatas->total_receive) && !empty($editDatas->total_receive) ? $editDatas->total_receive : ''); ?>" readonly ></td>
+                                                <td><input type="text" name="quantity[]" id="quantity<?php echo $key; ?>" onchange="sum(<?php echo $key; ?>)" class="form-control" value="<?php echo (isset($editDatas->receive_qty) && !empty($editDatas->receive_qty) ? $editDatas->receive_qty : ''); ?>"></td>
+                                                <td><input type="text" name="unit_price[]" id="unit_price<?php echo $key; ?>" onchange="sum(<?php echo $key; ?>)" class="form-control" value="<?php echo (isset($editDatas->unit_price) && !empty($editDatas->unit_price) ? $editDatas->unit_price : ''); ?>"></td>
+                                                <td><input type="text" name="totalamount[]" id="sum<?php echo $key; ?>" class="form-control" value="<?php echo (isset($editDatas->total_receive) && !empty($editDatas->total_receive) ? $editDatas->total_receive : ''); ?>"></td>
                                             <?php if ($key == 0) { ?>
                                                     <td><button type="button" name="add" id="add" class="btn" style="background-color:#2e3192;color:#ffffff;">+</button></td>
                                             <?php } else { ?>
@@ -237,19 +268,26 @@ if (isset($_GET['edit_id']) && !empty($_GET['edit_id'])) {
     ?>
                                                 </select>
                                             </td>
-                                            <td>
-												<select class="form-control material_select_2" id="country0" name="country[]">
-													<option value="">Select</option>
-													<option value="Indonesia">Indonesia</option>
-												</select>
-											</td>
+                                            <td><select class="form-control material_select_2" id="brand0" name="brand[]">
+														<option value="">Select</option>
+														<?php
+														$brandData = getmaterialbrand();
+														if (isset($brandData) && !empty($brandData)) {
+															foreach ($brandData as $data) {
+																?>
+																<option value="<?php echo $data['id']; ?>"><?php echo $data['brand_name']; ?></option>
+																<?php
+															}
+														}
+														?>
+													</select></td>
 											
 											
 											
 											
-                                            <td><input type="number" step=".01" name="quantity[]" id="quantity0" onkeyup="sum(0)" class="form-control"></td>
-                                            <td><input type="number" step=".01" name="unit_price[]" id="unit_price0" onkeyup="sum(0)" class="form-control"></td>
-                                            <td><input type="text" step=".01" name="totalamount[]" id="sum0" class="form-control" readonly ></td>
+                                            <td><input type="text" name="quantity[]" id="quantity0" onchange="sum(0)" class="form-control"></td>
+                                            <td><input type="text" name="unit_price[]" id="unit_price0" onchange="sum(0)" class="form-control"></td>
+                                            <td><input type="text" name="totalamount[]" id="sum0" class="form-control"></td>
                                             <td><button type="button" name="add" id="add" class="btn" style="background-color:#2e3192;color:#ffffff;">+</button></td>
                                         </tr>
 <?php } ?>
@@ -289,7 +327,9 @@ if (isset($_GET['edit_id']) && !empty($_GET['edit_id'])) {
                         </div>
 						
 						<div class="col-xs-6">
-                            
+                            <div style="border:1px solid gray;height:150px;width:150px;">
+								<img id="output" <?php if ($receiveData->mrr_image){ ?> src="images/<?php echo $receiveData->mrr_image; ?>" <?php } ?> height="150px" width="150px"/>
+                            </div>
                         </div>
                     </div>
                     <div class="row" style="">
@@ -336,7 +376,7 @@ if (isset($projectsData) && !empty($projectsData)) {
     foreach ($projectsData as $data) {
         ?><option value="<?php echo $data['id']; ?>"><?php echo $data['unit_name']; ?></option><?php }
 }
-?></select></td><td><select class="form-control material_select_2" id="country' + i + '" name="country[]' + i + '" ><option value="">Select</option><option value="Indonesia">Indonesia</option></select></td><td><input type="number" step=".01" name="quantity[]" id="quantity' + i + '" onkeyup="sum(' + i + ')" class="form-control"></td><td><input type="number" step=".01" name="unit_price[]" id="unit_price' + i + '" onkeyup="sum(' + i + ')" class="form-control"></td><td><input type="text" step=".01" name="totalamount[]" id="sum' + i + '" class="form-control" readonly ></td><td><button type="button" name="remove" id="' + i + '" class="btn btn_remove" style="background-color:#f26522;color:#ffffff;">X</button></td></tr>');
+?></select></td><td><select class="form-control material_select_2" id="brand' + i + '" name="brand[]"><option value="">Select</option><?php $brandData = getmaterialbrand();if (isset($brandData) && !empty($brandData)) {foreach ($brandData as $data) { ?><option value="<?php echo $data['id']; ?>"><?php echo $data['brand_name']; ?></option><?php } } ?> </select></td><td><input type="text" name="quantity[]" id="quantity' + i + '" onchange="sum(0)" class="form-control"></td><td><input type="text" name="unit_price[]" id="unit_price' + i + '" onchange="sum(0)" class="form-control"></td><td><input type="text" name="totalamount[]" id="sum' + i + '" class="form-control"></td><td><button type="button" name="remove" id="' + i + '" class="btn btn_remove" style="background-color:#f26522;color:#ffffff;">X</button></td></tr>');
             $('#quantity' + i + ', #unit_price' + i).change(function () {
                 sum(i)
             });
@@ -373,7 +413,7 @@ if (isset($projectsData) && !empty($projectsData)) {
         var unit_price1 = document.getElementById('unit_price' + i).value;
         var result = parseFloat(quantity1) * parseFloat(unit_price1);
         if (!isNaN(result)) {
-            document.getElementById('sum' + i).value = result.toFixed(2);
+            document.getElementById('sum' + i).value = result;
         }
         sum_total();
     }
@@ -413,17 +453,6 @@ if (isset($projectsData) && !empty($projectsData)) {
 <script>
     $(function () {
         $("#requisition_date").datepicker({
-            inline: true,
-            dateFormat: "yy-mm-dd",
-            yearRange: "-50:+10",
-            changeYear: true,
-            changeMonth: true
-        });
-    });
-</script>
-<script>
-    $(function () {
-        $("#bl_date").datepicker({
             inline: true,
             dateFormat: "yy-mm-dd",
             yearRange: "-50:+10",
