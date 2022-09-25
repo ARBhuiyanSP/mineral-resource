@@ -5,4 +5,4 @@ js/site_url.js
 /vendor
 /uploads
 format.php
-db
+/db

@@ -40,6 +40,7 @@ if (isset($_POST['login_submit']) && !empty($_POST['login_submit'])) {
                 $user_id    	=   $row->id;
                 $user_type		=   $row->user_type;
                 $project_id		=   $row->project_id;
+                $port_id		=   $row->port_id;
                 $warehouse_id	=   $row->warehouse_id;
                 unset($_SESSION['error']);
                 $_SESSION['success']                =   $fname.' '.$lname." have successfully loggedin!";
@@ -47,6 +48,7 @@ if (isset($_POST['login_submit']) && !empty($_POST['login_submit'])) {
                 $_SESSION['logged']['user_id']      =   $user_id;
                 $_SESSION['logged']['user_type']	=   $user_type;
                 $_SESSION['logged']['project_id']	=   $project_id;
+                $_SESSION['logged']['port_id']	=   $port_id;
                 $_SESSION['logged']['warehouse_id']	=   $warehouse_id;
 
                 $_SESSION['logged']['status']		=   true;

@@ -12,10 +12,11 @@ if (isset($_POST['warehouse_submit']) && !empty($_POST['warehouse_submit'])) {
         $warehouse_id	= $_POST['warehouse_id'];
         $name			= $_POST['name'];
         $short_name		= $_POST['short_name'];
-        $project_id		= $_POST['project_id'];
+        //$project_id		= $_POST['project_id'];
+        $port_id		= $_POST['port_id'];
         $address		= $_POST['address'];     
                
-        $query = "INSERT INTO `inv_warehosueinfo` (`warehouse_id`,`name`,`short_name`,`project_id`,`address`) VALUES ('$warehouse_id','$name','$short_name','$project_id','$address')";
+        $query = "INSERT INTO `inv_warehosueinfo` (`warehouse_id`,`name`,`short_name`,`port_id`,`address`) VALUES ('$warehouse_id','$name','$short_name','$port_id','$address')";
         $conn->query($query);
         
 		$_SESSION['success']    =   "Warehouse Entry process have been successfully completed.";

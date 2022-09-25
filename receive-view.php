@@ -49,47 +49,35 @@ $mrr_no=$_GET['no']; ?>
 							<div class="col-sm-6">	
 								<p>
 								<img src="images/Saif_Engineering_Logo_165X72.png" height="100px;"/>
-								<h5>E-engineering Ltd</h5><span>Waterlogging Project</span></br></p></div>
+								<h5>E-engineering Ltd</h5><span>Mineral Resources Project</span></br></p></div>
 							<div class="col-sm-6">
-								<table class="table table-bordered">
-									<tr>
-										<th>MRR No:</th>
-										<td><?php echo $mrr_no; ?></td>
-									</tr>
-									<tr>
-										<th>MRR Date:</th>
-										<td><?php
-										echo $rowd['mrr_date']; ?></td>
-									</tr>
-									<tr>
-										<th>Project:</th>
-										<td>
-											<?php 
-											$dataresult =   getDataRowByTableAndId('projects', $rowd['project_id']);
-											echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : '');
-											?>
-										</td>
-									</tr>
-									<tr>
-										<th>Challan No:</th>
-										<td>
-											<?php
-										echo $rowd['challanno']; ?>
-										</td>
-									</tr>
-									<tr>
-										<th>Supplier:</th>
-										<td>
-											<?php 
+								<div class="row">
+									<div class="col-sm-3">MRR:</div>
+									<div class="col-sm-9">No : <?php echo $mrr_no; ?> | Date : <?php echo $rowd['mrr_date']; ?></div>
+								</div>
+								<div class="row">
+									<div class="col-sm-3">LC:</div>
+									<div class="col-sm-9">No : <?php echo $rowd['lc_no']; ?> | Date : <?php echo $rowd['lc_date']; ?></div>
+								</div>
+								<div class="row">
+									<div class="col-sm-3">PKG:</div>
+									<div class="col-sm-9">No : <?php echo $rowd['pkg_no']; ?> | Date : <?php echo $rowd['pkg_date']; ?></div>
+								</div>
+								<div class="row">
+									<div class="col-sm-3">BL:</div>
+									<div class="col-sm-9">No : <?php echo $rowd['bl_no']; ?> | Date : <?php echo $rowd['bl_date']; ?></div>
+								</div>
+								<div class="row">
+									<div class="col-sm-3">Supplier:</div>
+									<div class="col-sm-9"><?php 
 											$supplier_id = $rowd['supplier_id'];
 											$sqlunit	=	"SELECT * FROM `suppliers` WHERE `code` = '$supplier_id' ";
 											$resultunit = mysqli_query($conn, $sqlunit);
 											$rowunit=mysqli_fetch_array($resultunit);
-											echo $rowunit['name'];
-											?>
-										</td>
-									</tr>
-								</table>
+											echo $rowunit['name'].'<br>';
+											echo $rowunit['address'];
+											?></div>
+								</div>
 							</div>
 						</div>
 						<center><button class="btn btn-block btn-secondary challan">MATERIAL RECEIVE DETAILS</button></center>
@@ -97,7 +85,6 @@ $mrr_no=$_GET['no']; ?>
 							<thead>
 								<tr>
 									<th>SL #</th>
-									<th>Material ID</th>
 									<th>Material Name</th>
 									<th>Material Unit</th>
 									<th>Quantity</th>
@@ -114,7 +101,6 @@ $mrr_no=$_GET['no']; ?>
 								?>
 								<tr>
 									<td><?php echo $i; ?></td>
-									<td><?php echo $row['material_id']; ?></td>
 									<td>
 										<?php 
 											$dataresult =   getDataRowByTableAndId('inv_material', $row['material_name']);
@@ -133,7 +119,7 @@ $mrr_no=$_GET['no']; ?>
 								</tr>
 								<?php } ?>
 								<tr>
-									<td colspan="4" class="grand_total">Grand Total:</td>
+									<td colspan="3" class="grand_total">Grand Total:</td>
 									<td>
 										<?php 
 										$sql2 			= "SELECT sum(receive_qty) FROM  `inv_receivedetail` where `mrr_no`='$mrr_no'";

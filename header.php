@@ -53,35 +53,9 @@ include 'includes/party_process.php';
   <script type="text/javascript" src="js/jquery-3.4.1.min.js"></script>
   <script type="text/javascript" src="js/select2.min.js"></script>
 </head>
-<style>
-/* body {
-  background-image: url("images/bg2.jpg");
-  background-color: #cccccc;
-} */
-
-.mborder{
-	padding:3px;
-	border:1px solid #808080;
-}
-.authimg{
-	position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translateX(-50%) translateY(-50%);
-    max-width: 100%;
-    max-height: 100%;
-}
-
-.reqfield{
-	color:red;
-	font-style: italic;
-	font-size:10px;
-	font-weight:bold;
-}
-</style>
 <body id="page-top">
   <nav class="navbar navbar-expand navbar-dark bg-dark static-top">
-    <a class="navbar-brand mr-1" href="index.php"><img src="images/Saif_Engineering_Logo_165X72.png" height="30px;"/></a>
+    <a class="navbar-brand mr-1" href="dashboard.php"><img src="images/Saif_Engineering_Logo_165X72.png" height="30px;"/></a>
     <button class="btn btn-link btn-sm text-white order-1 order-sm-0" id="sidebarToggle" href="#">
       <i class="fas fa-bars"></i>
     </button>
