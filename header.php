@@ -25,6 +25,9 @@ include 'includes/return_process.php';
 include 'includes/project_return_process.php';
 include 'includes/payment_process.php';
 include 'includes/consumption_process.php';
+
+include 'includes/party_process.php';
+
 ?>
 <!DOCTYPE html>
 <html lang="en">

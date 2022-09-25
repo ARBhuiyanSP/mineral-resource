@@ -1,18 +1,29 @@
 <?php
 /*******************************************************************************
  * The following code will
- * Store Receive entry data.
- * There are 4 table to keet track on receive data. The are following:
- * 1. inv_receive (Store single row)      
+    
  * 2. inv_receivedetail (Store Multiple row)
  * 3. inv_materialbalance (Store Multiple row)
  * 4. inv_supplierbalance (Store single row)
  * *****************************************************************************
  */  
-if (isset($_POST['issue_submit']) && !empty($_POST['issue_submit'])) {
+if (isset($_POST['issue_submit']) && !empty($_POST['issue_submit'])) 
+
+{
 	
+                                if ($_SESSION['logged']['user_type'] == 'whm') {
+                                    $warehouse_id = $_SESSION['logged']['warehouse_id'];
+                                    $sql = "SELECT * FROM inv_warehosueinfo WHERE `id`='$warehouse_id'";
+                                    $result = mysqli_query($conn, $sql);
+                                    $row = mysqli_fetch_array($result);
+                                    $short_name = $row['short_name'];
+                                    $issueCode = 'IS-' . $short_name;
+                                } else {
+                                    $issueCode = 'IS-CW';
+                                }
+                                
 	// check duplicate:
-	$issue_id	= $_POST['issue_id'];
+	$issue_id	= getDefaultCategoryCodeByWarehouse('inv_issue', 'issue_id', '03d', '001', $issueCode);
     $table		= 'inv_issue';
     $where		= "issue_id='$issue_id'";
     if(isset($_POST['issue_update_submit']) && !empty($_POST['issue_update_submit'])){
@@ -26,6 +37,7 @@ if (isset($_POST['issue_submit']) && !empty($_POST['issue_submit'])) {
 		$_SESSION['warning']    =   "Operation faild. Duplicate data found..!";
     }else{
 		    
+			
 			for ($count = 0; $count < count($_POST['quantity']); $count++) {
 				
 				/*
@@ -33,29 +45,77 @@ if (isset($_POST['issue_submit']) && !empty($_POST['issue_submit'])) {
 				*/       
 				
 				$issue_date         = $_POST['issue_date'];
-				$issue_id           = $_POST['issue_id'];
+				
+				$issue_id           = $issue_id;
+		
+				$party_id         = $_POST['party_id'];
+                $memono         = $_POST['memono'];
 				$project_id         = $_POST['project_id'];
 				$warehouse_id   	= $_POST['warehouse_id'];
-				$to_warehouse_id   	= $_POST['site_id'];
 				$material_name      = $_POST['material_name'][$count];
 				$material_id        = $_POST['material_id'][$count];
 				$unit               = $_POST['unit'][$count];
-				$brand            	= $_POST['brand'][$count];
+			    $brand            	= 'S';
+				
 				$quantity           = $_POST['quantity'][$count];
-				$package_id   		= $_POST['package_id'][$count];
-				$received_by		= $_POST['received_by'];     
-				$receiver_phone		= $_POST['receiver_phone'];     
-				$remarks            = $_POST['remarks'];     
+				$unit_price       	= $_POST['unit_price'][$count];
+				$amount         	= $_POST['amount'][$count];
+				$cur_price			= $_POST['cur_price'][$count];
+			
+
+				
+				$partner_id 		= $_POST['partner_id'];
+                $party_id   		= $_POST['party_id'];
 				
 				
-				if (is_uploaded_file($_FILES['file']['tmp_name'])) 
-				{
-					$temp_file=$_FILES['file']['tmp_name'];
-					$issue_image=time().$_FILES['file']['name'];
-					$q = move_uploaded_file($temp_file,"images/".$issue_image);
-				} 
+				
+				
+				
+				
+				$received_by		= $_SESSION['logged']['user_name'];
+
+
+
+
+
+
+
+
+				
+				$receiver_phone		= 0;     
+				$remarks            = $_POST['remarks'];  
+
+				
+				$cur_price_amount	    = $_POST['cur_amount'][$count];
+				
+				// replace netsaleamount 600-80(dis)=520 will be 520 not 600 change 28/4/2022
+				$total_amount       	= $_POST['total_amount'];
+				$discount_amount        = $_POST['discount_amount'];
+				$netsale_amount         = $_POST['netsale_amount'];
+				$paid_amount            = $_POST['paid_amount'];	
+				$due_amount             = $_POST['due_amount'];
+				$profitamount           = $_POST['profitamount'];
+				
+			
+				
+				$parent_item_id         = '0';
+				
+				
+				
+				
+				$approval_status		= ''; 
+				
+			
         
-				$query = "INSERT INTO `inv_issuedetail` (`issue_id`,`issue_date`,`material_id`,`material_name`,`unit`,`issue_qty`,`issue_price`,`part_no`,`project_id`,`warehouse_id`,`to_warehouse_id`,`package_id`,`approval_status`) VALUES ('$issue_id','$issue_date','$material_id','$material_name','$unit','$quantity','0','$brand','$project_id','$warehouse_id','$to_warehouse_id','$package_id','0')";
+		
+		
+		/*
+				 *  Insert Data Into inv_issuedetail Table:
+				*/
+				
+				
+				
+				$query = "INSERT INTO `inv_issuedetail` (`issue_id`,`issue_date`,`memono`,`material_id`,`material_name`,`unit`,`cur_price`,`cur_price_amount`,`issue_qty`,`issue_price`,`amount`,`part_no`,`project_id`,`warehouse_id`,`partner_id`,`party_id`,`approval_status`) VALUES ('$issue_id','$issue_date','$memono','$material_id','$material_name','$unit','$cur_price','$cur_price_amount','$quantity','$unit_price','$amount','$brand','$project_id','$warehouse_id','$partner_id','$party_id','0')";
 				$conn->query($query);
 				
 				/*
@@ -74,28 +134,52 @@ if (isset($_POST['issue_submit']) && !empty($_POST['issue_submit'])) {
 				$mbunit_id      = $project_id;
 				$mbserial_id    = 0;
 				$jvno           = $issue_id;
-				$part_no        = $brand;              
+				$part_no        = $brand;  
+
+                                 
+								   
 				
-				$query_inmb = "INSERT INTO `inv_materialbalance` (`mb_ref_id`,`mb_materialid`,`mb_date`,`mbin_qty`,`mbin_val`,`mbout_qty`,`mbout_val`,`mbprice`,`mbtype`,`mbserial`,`mbserial_id`,`mbunit_id`,`jvno`,`part_no`,`project_id`,`warehouse_id`) VALUES ('$mb_ref_id','$mb_materialid','$mb_date','$mbin_qty','$mbin_val','$mbout_qty','$mbout_val','$mbprice','$mbtype','$mbserial','$mbunit_id','$mbserial_id','$jvno','$part_no','$project_id','$warehouse_id')";
+				$query_inmb = "INSERT INTO `inv_materialbalance` (`mb_ref_id`,`mb_materialid`,`mb_date`,`mbin_qty`,`mbin_val`,`mbout_qty`,`mbout_val`,`mbprice`,`mbtype`,`mbserial`,`mbserial_id`,`mbunit_id`,`jvno`,`part_no`,`project_id`,`warehouse_id`,`partner_id`,`party_id`,`created_at`) VALUES ('$mb_ref_id','$mb_materialid','$mb_date','$mbin_qty','$mbin_val','$mbout_qty','$mbout_val','$mbprice','$mbtype','$mbserial','$mbunit_id','$mbserial_id','$jvno','$part_no','$project_id','$warehouse_id','$partner_id','$party_id','$issue_date')";
 				$conn->query($query_inmb);
 				
 				
 				
-				
-				$mbto_in_qty       = $quantity;
-				$mbto_in_val       = 0;
-				$mbto_out_qty      = 0;
-				$mbto_out_val      = 0;
-				$mbto_type         = 'Receive';
-				$query_inmb = "INSERT INTO `inv_materialbalance` (`mb_ref_id`,`mb_materialid`,`mb_date`,`mbin_qty`,`mbin_val`,`mbout_qty`,`mbout_val`,`mbprice`,`mbtype`,`mbserial`,`mbserial_id`,`mbunit_id`,`jvno`,`part_no`,`project_id`,`warehouse_id`) VALUES ('$mb_ref_id','$mb_materialid','$mb_date','$mbto_in_qty','$mbto_in_val','$mbto_out_qty','$mbto_out_val','$mbprice','$mbto_type','$mbserial','$mbunit_id','$mbserial_id','$jvno','$part_no','$project_id','$to_warehouse_id')";
-				$conn->query($query_inmb);
 				
 			}
 			/*
-			*  Insert Data Into inv_issue Table:
+			*  Insert Data Into inv_issue Table: Table: change 28/4/2022
 			*/
-			$query2 = "INSERT INTO `inv_issue` (`issue_id`,`issue_date`,`received_by`,`receiver_phone`,`remarks`,`project_id`,`warehouse_id`,`to_warehouse_id`,`issue_image`) VALUES ('$issue_id','$issue_date','$received_by','$receiver_phone','$remarks','$project_id','$warehouse_id','$to_warehouse_id','$issue_image')";
+			$total_cur = $_POST['total_cur'];
+			$total_amount = $_POST['total_amount'];
+			$profitamount = $_POST['profitamount'];
+			
+			$var_profit	= $profitamount  / 2;
+			
+			
+			
+			
+			$query2 = "INSERT INTO `inv_issue` (`issue_id`,`issue_date`,`memono`,`party_id`,`partner_id`,`received_by`,`totalcur`,`totalamount`,`discount_amount`,`netsale_amount`,`paidamount`,`Dueamount`,`profitamount`,`receiver_phone`,`remarks`,`project_id`,`warehouse_id`,`created_at`) VALUES ('$issue_id','$issue_date','$memono','$party_id','$partner_id','$received_by','$total_cur','$total_amount','$discount_amount','$netsale_amount','$paid_amount','$due_amount','$profitamount','$receiver_phone','$remarks','$project_id','$warehouse_id','$issue_date')";
 			$result2 = $conn->query($query2);
+			
+		
+				
+			
+			/*
+			*  Insert Data Into inv_partybalance Table: Table: change 28/4/2022
+			*/
+			
+			 $query3 = "INSERT INTO `inv_partybalance` (`pb_ref_id`,`warehouse_id`,`pb_date`,`memono`,`partner_id`,`pb_party_id`,`pb_dr_amount`,`pb_cr_amount`,`pb_remark`,`pb_partac_id`,`receivermode`,`approval_status`) VALUES ('$issue_id','$warehouse_id','$issue_date','$memono','$partner_id','$party_id','$netsale_amount','$paid_amount','$remarks','$issue_id','NAP','$approval_status')";
+    $result2 = $conn->query($query3);
+	
+	
+	
+
+	
+	
+	
+	
+	
+	
 			
 			$_SESSION['success']    =   "Issue process have been successfully completed.";
 			header("location: issue_entry.php");
@@ -160,6 +244,11 @@ if(isset($_GET['process_type']) && $_GET['process_type'] == 'get_building_by_pac
  * 4. inv_supplierbalance (Update single row)
  * *****************************************************************************
  */
+ 
+ 
+ 
+ 
+ 
 
 if(isset($_POST['issue_update_submit']) && !empty($_POST['issue_update_submit'])){
 
@@ -173,44 +262,75 @@ if(isset($_POST['issue_update_submit']) && !empty($_POST['issue_update_submit'])
     // first delete all from inv_materialbalance; 
     $delsq2    = "DELETE FROM `inv_materialbalance` WHERE `mb_ref_id`='$mrr_no'";
     $conn->query($delsq2);
+	
+	
+	
+	 // first delete all from inv_partybalance; 
+    $delsq4    = "DELETE FROM `inv_partybalance` WHERE `pb_ref_id`='$mrr_no'";
+    $conn->query($delsq4);
+	
+
+	
     
     for ($count = 0; $count < count($_POST['quantity']); $count++) {
-        /*
-         *  Insert Data Into inv_issuedetail Table:
-        */       
+        
+       /*    Insert Data Into inv_issuedetail Table: */
+               
         
 				$issue_date         = $_POST['issue_date'];
 				$issue_id           = $_POST['issue_id'];
-				$project_id         = $_POST['project_id'];
+		
+				$party_id           = $_POST['party_id'];
+                $memono             = $_POST['memono'];
+				$project_id         = 1;
 				$warehouse_id   	= $_POST['warehouse_id'];
-				
 				$material_name      = $_POST['material_name'][$count];
 				$material_id        = $_POST['material_id'][$count];
 				$unit               = $_POST['unit'][$count];
-				$brand            	= $_POST['brand'][$count];
+			    $brand            	= 'U';
+				
 				$quantity           = $_POST['quantity'][$count];
-				$package_id   		= $_POST['package_id'][$count];
+				$unit_price       	= $_POST['unit_price'][$count];
+				$amount         	= $_POST['amount'][$count];
+				$cur_price			= $_POST['cur_price'][$count];
+			
 
+				
+				$partner_id 		= $_POST['partner_id'];
+                $party_id   		= $_POST['party_id'];
+				$received_by		= $_SESSION['logged']['user_name'];     
+				$receiver_phone		= 1;     
+				$remarks            = $_POST['remarks'];  
 
 				
-				$received_by		= $_POST['received_by'];     
-				$receiver_phone		= $_POST['receiver_phone'];     
-				$remarks            = $_POST['remarks'];     
+				$cur_price_amount	    = $_POST['cur_amount'][$count];
+				
+				// replace netsaleamount 600-80(dis)=520 will be 520 not 600 change 28/4/2022
+				$total_amount       	= $_POST['total_amount'];
+				$discount_amount        = $_POST['discount_amount'];
+				$netsale_amount         = $_POST['netsale_amount'];
+				$paid_amount            = $_POST['paid_amount'];	
+				$due_amount             = $_POST['due_amount'];
+				$profitamount           = $_POST['profitamount'];
+				
+			
+				
+				$parent_item_id         = '1';
 				
 				
-				if (is_uploaded_file($_FILES['file']['tmp_name'])) 
-				{
-					$temp_file=$_FILES['file']['tmp_name'];
-					$issue_image=time().$_FILES['file']['name'];
-					$q = move_uploaded_file($temp_file,"images/".$issue_image);
-				} 
+				
+				
+				$approval_status		= '';     
+				
+				
+				
         
-				$query = "INSERT INTO `inv_issuedetail` (`issue_id`,`issue_date`,`material_id`,`material_name`,`unit`,`issue_qty`,`issue_price`,`part_no`,`project_id`,`warehouse_id`,`package_id`,`approval_status`) VALUES ('$issue_id','$issue_date','$material_id','$material_name','$unit','$quantity','0','$brand','$project_id','$warehouse_id','$package_id','0')";
+				$query = "INSERT INTO `inv_issuedetail` (`issue_id`,`issue_date`,`memono`,`material_id`,`material_name`,`unit`,`cur_price`,`cur_price_amount`,`issue_qty`,`issue_price`,`amount`,`part_no`,`project_id`,`warehouse_id`,`partner_id`,`party_id`,`approval_status`) VALUES ('$issue_id','$issue_date','$memono','$material_id','$material_name','$unit','$cur_price','$cur_price_amount','$quantity','$unit_price','$amount','$brand','$project_id','$warehouse_id','$partner_id','$party_id','0')";
 				$conn->query($query);
 				
-				/*
-				 *  Insert Data Into inv_materialbalance Table:
-				*/
+				
+				/*   Insert Data Into inv_materialbalance Table: */
+				
 				$mb_ref_id      = $issue_id;
 				$mb_materialid  = $material_id;
 				$mb_date        = (isset($issue_date) && !empty($issue_date) ? date('Y-m-d h:i:s', strtotime($issue_date)) : date('Y-m-d h:i:s'));
@@ -224,27 +344,43 @@ if(isset($_POST['issue_update_submit']) && !empty($_POST['issue_update_submit'])
 				$mbunit_id      = $project_id;
 				$mbserial_id    = 0;
 				$jvno           = $issue_id;
-				$part_no        = $brand;              
+				$part_no        = $brand;  
+
+                                 
+								   
 				
-				$query_inmb = "INSERT INTO `inv_materialbalance` (`mb_ref_id`,`mb_materialid`,`mb_date`,`mbin_qty`,`mbin_val`,`mbout_qty`,`mbout_val`,`mbprice`,`mbtype`,`mbserial`,`mbserial_id`,`mbunit_id`,`jvno`,`part_no`,`project_id`,`warehouse_id`) VALUES ('$mb_ref_id','$mb_materialid','$mb_date','$mbin_qty','$mbin_val','$mbout_qty','$mbout_val','$mbprice','$mbtype','$mbserial','$mbunit_id','$mbserial_id','$jvno','$part_no','$project_id','$warehouse_id')";
+				$query_inmb = "INSERT INTO `inv_materialbalance` (`mb_ref_id`,`mb_materialid`,`mb_date`,`mbin_qty`,`mbin_val`,`mbout_qty`,`mbout_val`,`mbprice`,`mbtype`,`mbserial`,`mbserial_id`,`mbunit_id`,`jvno`,`part_no`,`project_id`,`warehouse_id`,`partner_id`,`party_id`,`created_at`) VALUES ('$mb_ref_id','$mb_materialid','$mb_date','$mbin_qty','$mbin_val','$mbout_qty','$mbout_val','$mbprice','$mbtype','$mbserial','$mbunit_id','$mbserial_id','$jvno','$part_no','$project_id','$warehouse_id','$partner_id','$party_id','$issue_date')";
 				$conn->query($query_inmb);
     }
-    /*
-        *  Update Data Into inv_receive Table:
-    */
-				$issue_date         = $_POST['issue_date'];
-				$issue_id           = $_POST['issue_id'];
-				$project_id         = $_POST['project_id'];
-				$warehouse_id   	= $_POST['warehouse_id'];
-
-
+    
+	
+	
+      /*  *  Update Data Into inv_issue Table: */
+   
 				
-				$received_by		= $_POST['received_by'];     
-				$receiver_phone		= $_POST['receiver_phone'];     
-				$remarks            = $_POST['remarks'];
+				
+			$total_cur = $_POST['total_cur'];
+			$total_amount = $_POST['total_amount'];
+			$profitamount = $_POST['profitamount'];
+			
+			$var_profit	= $profitamount  / 2;	
+				
 
-    $query2    = "UPDATE inv_issue SET issue_id='$issue_id',issue_date='$issue_date',received_by='$received_by',receiver_phone='$receiver_phone',remarks='$remarks',project_id='$project_id',warehouse_id='$warehouse_id',approval_status='0',issue_image='$issue_image' WHERE id=$edit_id";
+     $query2    = "UPDATE inv_issue SET issue_id='$issue_id',issue_date='$issue_date',memono='$memono',party_id='$party_id',partner_id='$partner_id',received_by='$received_by',totalcur='$total_cur',totalamount='$total_amount',discount_amount='$discount_amount',netsale_amount='$netsale_amount',paidamount='$paid_amount',Dueamount='$due_amount',profitamount='$profitamount',receiver_phone='$receiver_phone',remarks='$remarks',project_id='$project_id',warehouse_id='$warehouse_id',created_at='$issue_date' WHERE id=$edit_id";
     $result2 = $conn->query($query2);
+	
+	
+	
+	/*
+			*  Insert Data Into inv_partybalance Table: Table: change 28/4/2022
+			*/
+			
+			 $query3 = "INSERT INTO `inv_partybalance` (`pb_ref_id`,`warehouse_id`,`pb_date`,`memono`,`partner_id`,`pb_party_id`,`pb_dr_amount`,`pb_cr_amount`,`pb_remark`,`pb_partac_id`,`approval_status`) VALUES ('$issue_id','$warehouse_id','$issue_date','$memono','$partner_id','$party_id','$netsale_amount','$paid_amount','$remarks','$issue_id','$approval_status')";
+    $result2 = $conn->query($query3);
+	
+	
+
+	
     
     $_SESSION['success']    =   "Issue process have been successfully updated.";
     header("location: issue_edit.php?edit_id=".$edit_id);

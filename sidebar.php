@@ -28,12 +28,21 @@
                 <span class="sub_menu_text_design"> UOM</span>
             </a>
             <a class="dropdown-item" href="supplier_entry.php">
+<<<<<<< HEAD
+                <i class="fa fa-bullseye" aria-hidden="true" style="color: #007BFF;"></i>
+                <span class="sub_menu_text_design"> Supplier Entry</span>
+            </a>
+			<a class="dropdown-item" href="party_entry.php">
+                <i class="fa fa-bullseye" aria-hidden="true" style="color: #007BFF;"></i>
+                <span class="sub_menu_text_design"> Party Entry</span>
+
                 <i class="fa fa-bullseye" aria-hidden="true" style="color: #000;"></i>
                 <span class="sub_menu_text_design"> Supplier Add</span>
             </a>
 			<a class="dropdown-item" href="supplier_info.php">
                 <i class="fa fa-bullseye" aria-hidden="true" style="color: #000;"></i>
                 <span class="sub_menu_text_design"> Supplier Report</span>
+
             </a>
             <a class="dropdown-item" href="port_entry.php">
                 <i class="fa fa-bullseye" aria-hidden="true" style="color: #000;"></i>
