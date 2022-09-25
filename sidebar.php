@@ -65,11 +65,11 @@
             </a>
             <a class="dropdown-item" href="supplier_entry.php">
                 <i class="fa fa-bullseye" aria-hidden="true" style="color: #007BFF;"></i>
-                <span class="sub_menu_text_design"> Supplier Add</span>
+                <span class="sub_menu_text_design"> Supplier Entry</span>
             </a>
-			<a class="dropdown-item" href="supplier_info.php">
+			<a class="dropdown-item" href="party_entry.php">
                 <i class="fa fa-bullseye" aria-hidden="true" style="color: #007BFF;"></i>
-                <span class="sub_menu_text_design"> Supplier Report</span>
+                <span class="sub_menu_text_design"> Party Entry</span>
             </a>
             <a class="dropdown-item" href="project_entry.php">
                 <i class="fa fa-bullseye" aria-hidden="true" style="color: #007BFF;"></i>
