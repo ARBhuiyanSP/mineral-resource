@@ -12,20 +12,13 @@
             <a href="consumption_report.php">Sales Report</a>
         </li>
         <li class="breadcrumb-item active">Delivery Order</li>
-		
-		
-		        <li class="breadcrumb-item" style="text-align:right;">
-								
-								<?php  
-									$warehouse_id = $_SESSION['logged']['warehouse_id'];								
-									$dataresult =   getDataRowByTableAndId('inv_warehosueinfo', $warehouse_id);
-								
-								echo 'Location: <b>'.(isset($dataresult) && !empty($dataresult) ? $dataresult->name : '').'</b>'; ?>
+		<li class="breadcrumb-item" style="text-align:right;">
+			<?php  
+				$warehouse_id = $_SESSION['logged']['warehouse_id'];								
+				$dataresult =   getDataRowByTableAndId('inv_warehosueinfo', $warehouse_id);
+				echo 'Location: <b>'.(isset($dataresult) && !empty($dataresult) ? $dataresult->name : '').'</b>'; 
+			?>
 		</li>
-		
-		
-		
-		
     </ol>
     <!-- DataTables Example -->
     <div class="card mb-3">
@@ -43,7 +36,6 @@
                                 <input type="text" autocomplete="off" name="issue_date" id="issue_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
                             </div>
                         </div>
-						
                         <div class="col-xs-2">
                             <div class="form-group">
                                 <label>Delivery No</label>
@@ -63,27 +55,14 @@
                                 <input type="hidden" name="issue_no" id="issue_no" value="<?php echo getDefaultCategoryCodeByWarehouse('inv_issue', 'issue_id', '03d', '001', $issueCode) ?>">
                             </div>
                         </div>
-						
-						
-						
-						
-						
-						
-						
-						
-						
-						
-					<div class="col-xs-2">
-                            <div class="form-group">
-                                <label for="id">P/O No</label>
-                                <input type="text" name="pono" id="pono" class="form-control">
-                            </div>
-                        </div>
-						
-						
-						
-                       	<td style="width:30%">
-								<div class="form-group">
+						<div class="col-xs-2">
+							<div class="form-group">
+								<label for="id">P/O No</label>
+								<input type="text" name="po_no" id="pono" class="form-control">
+							</div>
+						</div>
+						<div class="col-xs-2">
+							<div class="form-group">
 								<label for="id">Party Name</label><span class="reqfield"> ***required</span>
 								<select class="form-control" id="main_sub_item_id" name="partyname" onchange="getItemCodeByParam(this.value, 'tb_party', 'party_id', 'party_id');">
 									<option value="">Select</option>
@@ -97,34 +76,25 @@
 									} ?>
 								</select>
 							</div>
-							</td>
-							
-						
-                        <div class="col-xs-1">
+						</div>
+                        <div class="col-xs-2">
                             <div class="form-group">
                                 <label for="id">party ID</label>
                                 <input type="text" name="party_id" id="party_id" class="form-control" readonly required>
                             </div>
                         </div>
-						
-						
 						<div class="col-xs-2">
                             <div class="form-group">
                                 <label>Payment Type</label>
-                                <select name="partystatus" id="partystatus" value="<?php if (isset($rowedit['partystatus']) && $rowedit['partystatus'] != '') { echo $rowedit['partystatus']; }?>" class="form-control">
+                                <select name="payment_type" id="payment_type" value="" class="form-control">
 									<option value="Cash">Cash</option>
 									<option value="Credit">Credit</option>
 									
 								</select>
                             </div>
                         </div>
-						
-						
-						
-						
-						
-						<td style="width:30%">
-								<div class="form-group">
+						<div class="col-xs-2">
+							<div class="form-group">
 								<label for="id">S.E Name</label><span class="reqfield"> ***required</span>
 								<select class="form-control" id="main_sub_item_id" name="salesexuctivename" onchange="getItemCodeByParam(this.value, 'tb_salesexcutive', 'se_id', 'se_id');">
 									<option value="">Select</option>
@@ -138,10 +108,8 @@
 									} ?>
 								</select>
 							</div>
-							</td>
-							
-						
-                        <div class="col-xs-1">
+                        </div>
+                        <div class="col-xs-2">
                             <div class="form-group">
                                 <label for="id">S.E ID</label>
                                 <input type="text" name="se_id" id="se_id" class="form-control" readonly required>
@@ -151,22 +119,26 @@
 						<div class="col-xs-2">
                             <div class="form-group">
                                 <label for="id">Due/Credit Amount</label>
-                                <input type="text" name="credit" id="credit" class="form-control">
+                                <input type="text" name="" id="credit" class="form-control" readonly >
+                            </div>
+                        </div>
+						<div class="col-xs-2">
+                            <div class="form-group">
+                                <label for="id">Last MR No</label>
+                                <input type="text" name="" id="preparedby" class="form-control" readonly >
+                            </div>
+                        </div>
+						<div class="col-xs-2">
+                            <div class="form-group">
+                                <label for="id">Last MR Date</label>
+                                <input type="text" name="" id="preparedby" class="form-control" readonly >
                             </div>
                         </div>
 						
 						<div class="col-xs-2">
                             <div class="form-group">
                                 <label for="id">Prepared By</label>
-                                <input type="text" name="preparedby" id="preparedby" class="form-control">
-                            </div>
-                        </div>
-
-
-						<div class="col-xs-2">
-                            <div class="form-group">
-                                <label for="id">Authorized by</label>
-                                <input type="text" name="authorizedby" id="authorizedby" class="form-control">
+                                <input type="text" name="" value="<?php echo $_SESSION['logged']['user_name']; ?>" class="form-control" readonly >
                             </div>
                         </div>
 						
@@ -180,6 +152,8 @@
                                 ?>
                                 <input type="hidden" class="form-control" readonly="readonly" value="<?php echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : ''); ?>">
 
+                                <input type="hidden" name="port_id" id="port_id" class="form-control" readonly="readonly" value="<?php echo $_SESSION['logged']['port_id']; ?>">
+								
                                 <input type="hidden" name="warehouse_id" id="warehouse_id" class="form-control" readonly="readonly" value="<?php echo $_SESSION['logged']['warehouse_id']; ?>">
               
                         </div>
@@ -240,7 +214,7 @@
 										
 										<!-- Start: text QTY and Unit Price and Total amount -->
 										
-										<td><input type="text" name="quantity[]" id="quantity0" onchange="check_stock_quantity_validation(0)" class="form-control common_issue_quantity" required></td>
+										<td><input type="text" name="quantity[]" id="quantity0" onchange="sum(0)" onkeyup="check_stock_quantity_validation(0)" class="form-control common_issue_quantity" required></td>
 					  
                                
                                        
@@ -256,8 +230,14 @@
                         </div>
                     </div>
 					
-					
-							<div class="col-sm-4">
+					<div class="row" style="">
+						<div class="col-sm-8">
+							<div class="form-group">
+                                <label>Remarks</label>
+                                <textarea id="remarks" name="remarks" class="form-control" rows="6"></textarea>
+                            </div>
+						</div>
+						<div class="col-sm-4">
 							<table class="table table-bordered">
 							
 								<tr>
@@ -268,7 +248,7 @@
 								
 								
 								<tr>
-									<td>Discount Amount (%/amt) <span class="reqfield"> req</span></td>
+									<td>Discount Amount <span class="reqfield"> req</span></td>
 									<td><input type="text" class="form-control" name="discount_amount" id="discount" class="form-control" required></td>
 								</tr>
 								
@@ -289,58 +269,8 @@
 									<td>Due Amount</td>
 									<td><input type="text" class="form-control" name="due_amount" id="due" class="form-control" readonly ></td>
 								</tr>
-								
-							
-								
-								
-								
 							</table>
 						</div>
-					
-                    
-						
-						
-						
-						
-						                    <div class="row" id="div1"  style="">
-                        <div class="table-responsive">
-                            <table class="table table-bordered" id="dynamic_field">
-                                <thead>
-                                <th width="40%">last Mr No </th>
-                                <th width="10%">Last Mr Date</th>
-                                <th width="10%">Last MR No</th>
-								
-                                </thead>
-                                <tbody>
-                                    <tr>
-                                        
-                                    
-										
-		<td><input type="text" class="form-control" maxlength="10" name="lastmrno" id="lastmrno"  /></td>	
-										
-		<td><input type="text" class="form-control" maxlength="10" name="lastmrdate" id="lastmrdate"  /></td>
-		
-		<td><input type="text" class="form-control" maxlength="10" name="lastmramount" id="lastmramount"  /></td>
-                               
-                            
-                                    </tr>
-                                </tbody>
-                            </table>
-                        </div>
-                    </div>
-					
-					
-					
-					
-					<div class="row" style="">
-						<div class="col-sm-8">
-							<div class="form-group">
-                                <label>Remarks</label>
-                                <textarea id="remarks" name="remarks" class="form-control" rows="6"></textarea>
-                            </div>
-						</div>
-					
-				
                     </div>
 					
 					
@@ -396,7 +326,7 @@
                                             ?><option value="<?php echo $data['id']; ?>"><?php echo $data['unit_name']; ?></option><?php
                                         }
                                     }
-                                    ?></select></td><td><input type="text" name="material_total_stock[]" id="material_total_stock' + i + '" class="form-control" readonly></td><td><input type="text" name="quantity[]" id="quantity' + i + '" onchange="check_stock_quantity_validation(' + i + ')" class="form-control common_issue_quantity" required></td><td><input type="text" name="unit_price[]" id="unit_price' + i + '" onchange="sum(0)" class="form-control" required></td><td><input type="text" name="amount[]" id="sum' + i + '" class="form-control"></td><td><button type="button" name="remove" id="' + i + '" class="btn btn_remove" style="background-color:#f26522;color:#ffffff;">X</button></td></tr>');
+                                    ?></select></td><td><input type="text" name="material_total_stock[]" id="material_total_stock' + i + '" class="form-control" readonly></td><td><input type="text" name="quantity[]" id="quantity' + i + '" onchange="sum(0)" onkeyup="check_stock_quantity_validation('+ i + ')" class="form-control common_issue_quantity" required></td><td><input type="text" name="unit_price[]" id="unit_price' + i + '" onchange="sum(0)" class="form-control" required></td><td><input type="text" name="amount[]" id="sum' + i + '" class="form-control"></td><td><button type="button" name="remove" id="' + i + '" class="btn btn_remove" style="background-color:#f26522;color:#ffffff;">X</button></td></tr>');
 									$(".material_select_2").select2();
 									
 									<!-- COMMENTS: QTY AND UNIT PRICE AND TOTAL AMOUNT -->
@@ -448,7 +378,7 @@
 	
 	$(function () {
 	  $("#allsum, #paid").keyup(function () {
-		$("#due").val(+$("#allsum").val() - +$("#paid").val());
+		$("#due").val(+$("#netsale").val() - +$("#paid").val());
 	  });
 	});
 </script>

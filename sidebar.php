@@ -6,7 +6,7 @@
             <span>Dashboard</span>
         </a>
     </li>
-	<?php if($_SESSION['logged']['user_type'] !== 'whm') {?>
+	<?php if($_SESSION['logged']['user_type'] !== 'admin') {?>
 	<?php if($_SESSION['logged']['user_type'] !== 'superAdmin') {?>
     <li class="nav-item" style="background-color:#ffffff;">
         <span class="nav-link" href="#">
@@ -28,14 +28,14 @@
                 <span class="sub_menu_text_design"> UOM</span>
             </a>
             <a class="dropdown-item" href="supplier_entry.php">
-<<<<<<< HEAD
-                <i class="fa fa-bullseye" aria-hidden="true" style="color: #007BFF;"></i>
+                <i class="fa fa-bullseye" aria-hidden="true" style="color: #000;"></i>
                 <span class="sub_menu_text_design"> Supplier Entry</span>
             </a>
 			<a class="dropdown-item" href="party_entry.php">
-                <i class="fa fa-bullseye" aria-hidden="true" style="color: #007BFF;"></i>
+                <i class="fa fa-bullseye" aria-hidden="true" style="color: #000;"></i>
                 <span class="sub_menu_text_design"> Party Entry</span>
-
+			</a>
+			<a class="dropdown-item" href="supplier_entry.php">
                 <i class="fa fa-bullseye" aria-hidden="true" style="color: #000;"></i>
                 <span class="sub_menu_text_design"> Supplier Add</span>
             </a>
@@ -128,17 +128,15 @@
             <a class="dropdown-item" href="return-list.php"><i class="fa fa-list" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Return List</span></a>
         </div>
     </li>
-
-	
-    <li class="nav-item">
-        <a class="nav-link" href="opening_balance.php">
-            <i class="fa fa-key" aria-hidden="true" style="color: #ffffff;"></i>
-            <span>Opening Stock Entry</span></a>
+	<li class="nav-item">
+        <a class="nav-link" href="party_payment.php">
+            <i class="fa fa-money-bill" aria-hidden="true" style="color: #ffffff;"></i>
+            <span>Party Payment</span></a>
     </li>
 	 <li class="nav-item">
         <a class="nav-link" href="payment_entry.php">
             <i class="fa fa-money-bill" aria-hidden="true" style="color: #ffffff;"></i>
-            <span>Payment Entry</span></a>
+            <span>Supplier Payment</span></a>
     </li>
 
 	<?php } ?>

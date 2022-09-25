@@ -48,7 +48,7 @@ if (isset($_POST['login_submit']) && !empty($_POST['login_submit'])) {
                 $_SESSION['logged']['user_id']      =   $user_id;
                 $_SESSION['logged']['user_type']	=   $user_type;
                 $_SESSION['logged']['project_id']	=   $project_id;
-                $_SESSION['logged']['port_id']	=   $port_id;
+                $_SESSION['logged']['port_id']		=   $port_id;
                 $_SESSION['logged']['warehouse_id']	=   $warehouse_id;
 
                 $_SESSION['logged']['status']		=   true;

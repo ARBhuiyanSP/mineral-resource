@@ -115,11 +115,11 @@ $mrr_no=$_GET['no']; ?>
 									</td>
 									<td><?php echo $row['receive_qty'] ?></td>
 									<td><?php echo $row['unit_price'] ?></td>
-									<td><?php echo $row['total_receive'] ?></td>
+									<td style="text-align:right"><?php echo $row['total_receive'] ?></td>
 								</tr>
 								<?php } ?>
 								<tr>
-									<td colspan="3" class="grand_total">Grand Total:</td>
+									<td colspan="3" class="grand_total" style="text-align:right">Grand Total:</td>
 									<td>
 										<?php 
 										$sql2 			= "SELECT sum(receive_qty) FROM  `inv_receivedetail` where `mrr_no`='$mrr_no'";
@@ -131,7 +131,7 @@ $mrr_no=$_GET['no']; ?>
 										?>
 									</td>
 									<td></td>
-									<td>
+									<td style="text-align:right">
 										<?php 
 										$sql2			= "SELECT sum(total_receive) FROM  `inv_receivedetail` where `mrr_no`='$mrr_no'";
 										$result2		= mysqli_query($conn, $sql2);

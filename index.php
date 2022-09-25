@@ -11,7 +11,7 @@ include 'includes/login_process.php';
         <meta name="description" content="">
         <meta name="author" content="">
         <link rel="icon" href="images/fav.png">
-        <title>Inventory</title>
+        <title>Mineral Resources | Inventory</title>
         <!-- Custom fonts for this template-->
         <link href="css/fontawesome/css/all.min.css" rel="stylesheet" type="text/css">
         <!-- Custom styles for this template-->

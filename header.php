@@ -27,6 +27,7 @@ include 'includes/payment_process.php';
 include 'includes/consumption_process.php';
 
 include 'includes/party_process.php';
+include 'includes/party_payment_process.php';
 
 ?>
 <!DOCTYPE html>
