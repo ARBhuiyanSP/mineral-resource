@@ -1,58 +1,186 @@
-<?php
+<?php include 'header.php' ?>
+<div class="container-fluid">
+    <!-- Breadcrumbs-->
+    <ol class="breadcrumb">
+        <li class="breadcrumb-item">
+            <a href="#">Receive Report Filters</a>
+        </li>
+        <li class="breadcrumb-item active">Receive Report Search</li>
+    </ol>
 
-echo convertNumberToWords(2856.80);
 
 
-function convertNumberToWords(float $number)
-{
-    $decimal = round($number - ($no = floor($number)), 2) * 100;
-    $decimal_part = $decimal;
-    $hundred = null;
-    $hundreds = null;
-    $digits_length = strlen($no);
-    $decimal_length = strlen($decimal);
-    $i = 0;
-    $str = array();
-    $str2 = array();
-    $words = array(0 => '', 1 => 'one', 2 => 'two',
-        3 => 'three', 4 => 'four', 5 => 'five', 6 => 'six',
-        7 => 'seven', 8 => 'eight', 9 => 'nine',
-        10 => 'ten', 11 => 'eleven', 12 => 'twelve',
-        13 => 'thirteen', 14 => 'fourteen', 15 => 'fifteen',
-        16 => 'sixteen', 17 => 'seventeen', 18 => 'eighteen',
-        19 => 'nineteen', 20 => 'twenty', 30 => 'thirty',
-        40 => 'forty', 50 => 'fifty', 60 => 'sixty',
-        70 => 'seventy', 80 => 'eighty', 90 => 'ninety');
-    $digits = array('', 'hundred','thousand','lakh', 'crore');
-
-    while( $i < $digits_length ) {
-        $divider = ($i == 2) ? 10 : 100;
-        $number = floor($no % $divider);
-        $no = floor($no / $divider);
-        $i += $divider == 10 ? 1 : 2;
-        if ($number) {
-            $plural = (($counter = count($str)) && $number > 9) ? 's' : null;
-            $hundred = ($counter == 1 && $str[0]) ? ' and ' : null;
-            $str [] = ($number < 21) ? $words[$number].' '. $digits[$counter]. $plural.' '.$hundred:$words[floor($number / 10) * 10].' '.$words[$number % 10]. ' '.$digits[$counter].$plural.' '.$hundred;
-        } else $str[] = null;
-    }
-
-    $d = 0;
-    while( $d < $decimal_length ) {
-        $divider = ($d == 2) ? 10 : 100;
-        $decimal_number = floor($decimal % $divider);
-        $decimal = floor($decimal / $divider);
-        $d += $divider == 10 ? 1 : 2;
-        if ($decimal_number) {
-            $plurals = (($counter = count($str2)) && $decimal_number > 9) ? 's' : null;
-            $hundreds = ($counter == 1 && $str2[0]) ? ' and ' : null;
-            @$str2 [] = ($decimal_number < 21) ? $words[$decimal_number].' '. $digits[$decimal_number]. $plural.' '.$hundred:$words[floor($decimal_number / 10) * 10].' '.$words[$decimal_number % 10]. ' '.$digits[$counter].$plural.' '.$hundred;
-        } else $str2[] = null;
-    }
-
-    $Taka = implode('', array_reverse($str));
-    $Paysa = implode('', array_reverse($str2));
-    $Paysa = ($decimal_part > 0) ? $Paysa . ' Paysa' : '';
-    return ($Taka ? $Taka . 'Taka ' : '') . $Paysa;
+<style>
+.scrollbar-deep-purple::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px;
 }
-?>
+
+.scrollbar-deep-purple::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar-deep-purple::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #512da8;
+}
+
+.scrollbar-deep-purple {
+    scrollbar-color: #512da8 #F5F5F5;
+}
+
+.scrollbar-cyan::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.scrollbar-cyan::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar-cyan::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #00bcd4;
+}
+
+.scrollbar-cyan {
+    scrollbar-color: #00bcd4 #F5F5F5;
+}
+
+.scrollbar-dusty-grass::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.scrollbar-dusty-grass::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar-dusty-grass::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-image: -webkit-linear-gradient(330deg, #d4fc79 0%, #96e6a1 100%);
+    background-image: linear-gradient(120deg, #d4fc79 0%, #96e6a1 100%);
+}
+
+.scrollbar-ripe-malinka::-webkit-scrollbar-track {
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-color: #F5F5F5;
+    border-radius: 10px;
+}
+
+.scrollbar-ripe-malinka::-webkit-scrollbar {
+    width: 12px;
+    background-color: #F5F5F5;
+}
+
+.scrollbar-ripe-malinka::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    -webkit-box-shadow: inset 0 0 6px rgba(0, 0, 0, 0.1);
+    background-image: -webkit-linear-gradient(330deg, #f093fb 0%, #f5576c 100%);
+    background-image: linear-gradient(120deg, #f093fb 0%, #f5576c 100%);
+}
+
+.bordered-deep-purple::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+    border: 1px solid #512da8;
+}
+
+.bordered-deep-purple::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: none;
+}
+
+.bordered-cyan::-webkit-scrollbar-track {
+    -webkit-box-shadow: none;
+    border: 1px solid #00bcd4;
+}
+
+.bordered-cyan::-webkit-scrollbar-thumb {
+    -webkit-box-shadow: none;
+}
+
+.square::-webkit-scrollbar-track {
+    border-radius: 0 !important;
+}
+
+.square::-webkit-scrollbar-thumb {
+    border-radius: 0 !important;
+}
+
+.thin::-webkit-scrollbar {
+    width: 6px;
+}
+
+.example-1 {
+    position: relative;
+    overflow-y: scroll;
+    height: 200px;
+}
+</style>
+
+
+<!-- Grid row -->
+<div class="row">
+
+  <!-- Grid column -->
+  <div class="col-md-6 mb-4">
+
+    <!-- Exaple 1 -->
+    <div class="card example-1 scrollbar-ripe-malinka">
+      <div class="card-body">
+        <h4 id="section1"><strong>First title of the news</strong></h4>
+        <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
+          qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
+          mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
+          qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
+          Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+        <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
+          qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
+          mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
+          qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
+          Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+      </div>
+    </div>
+    <!-- Exaple 1 -->
+
+  </div>
+  <!-- Grid column -->
+
+  <!-- Grid column -->
+  <div class="col-md-6 mb-4">
+
+    <!-- Exaple 1 -->
+    <div class="card example-1 square scrollbar-cyan bordered-cyan">
+      <div class="card-body">
+        <h4 id="section1"><strong>Second title of the news</strong></h4>
+        <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
+          qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
+          mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
+          qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
+          Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+        <p>Ad leggings keytar, brunch id art party dolor labore. Pitchfork yr enim lo-fi before they sold out
+          qui. Tumblr farm-to-table bicycle rights whatever. Anim keffiyeh carles cardigan. Velit seitan
+          mcsweeney's photo booth 3 wolf moon irure. Cosby sweater lomo jean shorts, williamsburg hoodie minim
+          qui you probably haven't heard of them et cardigan trust fund culpa biodiesel wes anderson aesthetic.
+          Nihil tattooed accusamus, cred irony biodiesel keffiyeh artisan ullamco consequat.</p>
+      </div>
+    </div>
+    <!-- Exaple 1 -->
+
+  </div>
+  <!-- Grid column -->
+
+</div>
+<!-- Grid row -->
+
+</div>
+<!-- /.container-fluid -->
+<?php include 'footer.php' ?>

@@ -68,7 +68,7 @@ include 'includes/consumption_process.php';
         </a>
         <div class="dropdown-menu dropdown-menu-right" aria-labelledby="userDropdown">
           <a class="dropdown-item" href="profile.php">Profile</a>
-		  <!-------------------------------------- Switch User -------------------------------------------------->
+		  <!-------------------------------------- Switch User -------------------------------------------------
 		  <?php
 			$warehouse = getTableDataByTableName('inv_warehosueinfo','','name');
 			if (isset($warehouse) && !empty($warehouse)) {
@@ -76,7 +76,7 @@ include 'includes/consumption_process.php';
 			 if($_SESSION['logged']['user_type'] !== 'whm') {		?>
           <a class="dropdown-item" href="includes/switch_user.php?id=<?php  echo $data['id'] ?>">Switch To <?php echo $data['name'] ?></a>
 			<?php } } }?>
-		  <!-------------------------------------- Switch User -------------------------------------------------->
+		  -------------------------------------- Switch User -------------------------------------------------->
 		  
           <a class="dropdown-item" href="includes/logout.php">Logout</a>
           <!--<a class="dropdown-item" href="#">Settings</a>-->

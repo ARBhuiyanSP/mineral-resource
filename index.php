@@ -22,7 +22,7 @@ include 'includes/login_process.php';
             <div class="card card-login mx-auto mt-5">
                 <div class="card-header" style="text-align: center;">
                     <img src="images/Saif_Engineering_Logo_165X72.png" />
-					<center><h3 style="background-color:#007BFF;color:#ffffff;padding:5px;border-radius:5px;">Waterlogging Project</h3></center>
+					<center><h3 style="background-color:#007BFF;color:#ffffff;padding:5px;border-radius:5px;">Mineral Resources</h3></center>
                 </div>
                 <div class="card-body">
                     <form id="login_form" name="login_form" method="post">
