@@ -41,6 +41,12 @@ if (isset($_POST['format_submit']) && !empty($_POST['format_submit'])) {
 	$query10 = "DELETE from inv_returndetail;";
     $result10 = $conn->query($query10);
 	
+	$query11 = "DELETE from inv_partybalance;";
+    $result11 = $conn->query($query11);
+	
+	$query12 = "DELETE from party_payment;";
+    $result12 = $conn->query($query12);
+	
     $_SESSION['success']    =   "Format has been successfully completed.";
     header("location: format.php");
     exit();

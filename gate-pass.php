@@ -74,7 +74,7 @@ $issue_id=$_GET['no']; ?>
 								</table>
 							</div>
 						</div>
-						<center><h3 >DELIVERY ORDER/INVOICE</h3></center>
+						<center><h3 >GATE PASS</h3></center>
 						<center>MATERIAL ISSUE DETAILS</center>
 						<table class="table table-bordered" id="material_receive_list"> 
 							<thead>
@@ -84,7 +84,6 @@ $issue_id=$_GET['no']; ?>
 									<th>Material Name</th>
 									<th>Material Unit</th>
 									<th>Quantity</th>
-									<th>Amount</th>
 								</tr>
 							</thead>
 							<tbody id="material_receive_list_body">
@@ -111,10 +110,9 @@ $issue_id=$_GET['no']; ?>
 									</td>
 										
 									<td><?php echo $row['issue_qty'] ?></td>
-									<td><?php echo $row['amount'] ?></td>
 								</tr>
 								<?php } ?>
-								<tr style="text-align:right;">
+								<tr>
 									<td colspan="4" class="grand_total">Grand Total:</td>
 									<td>
 										<?php 
@@ -127,30 +125,9 @@ $issue_id=$_GET['no']; ?>
 										}
 										?>
 									</td>
-									<td><?php echo $rowd['totalamount'] ?></td>
-								</tr>
-								<tr style="text-align:right;">
-									<td colspan="5" class="grand_total">Discount:</td>
-									<td><?php echo $rowd['discount_amount'] ?></td>
-								</tr>
-								<tr style="text-align:right;">
-									<td colspan="5" class="grand_total">Netsale Amount:</td>
-									<td><?php echo $rowd['netsale_amount'] ?></td>
-								</tr>
-								<tr style="text-align:right;">
-									<td colspan="5" class="grand_total">Netsale Amount:</td>
-									<td><?php echo $rowd['netsale_amount'] ?></td>
-								</tr>
-								<tr style="text-align:right;">
-									<td colspan="5" class="grand_total">Paid Amount:</td>
-									<td><?php echo $rowd['paidamount'] ?></td>
-								</tr>
-								<tr style="text-align:right;">
-									<td colspan="5" class="grand_total">Due Amount:</td>
-									<td><?php echo $rowd['Dueamount'] ?></td>
 								</tr>
 								<tr>
-									<td colspan="6">Remarks:</br>
+									<td colspan="5">Remarks:</br>
 										<?php 
 										echo $rowd['remarks'];
 										?>

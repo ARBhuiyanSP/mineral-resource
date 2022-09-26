@@ -50,6 +50,8 @@ if (isset($_POST['issue_submit']) && !empty($_POST['issue_submit']))
                 $payment_type         		= $_POST['payment_type'];
 				$port_id         	= $_POST['port_id'];
 				$warehouse_id   	= $_POST['warehouse_id'];
+				$salesexuctivename   	= $_POST['salesexuctivename'];
+				$se_id   	= $_POST['se_id'];
 				$material_name      = $_POST['material_name'][$count];
 				$material_id        = $_POST['material_id'][$count];
 				$unit               = $_POST['unit'][$count];
@@ -156,7 +158,7 @@ if (isset($_POST['issue_submit']) && !empty($_POST['issue_submit']))
 			
 			
 			
-			$query2 = "INSERT INTO `inv_issue` (`issue_id`,`issue_date`,`po_no`,`payment_type`,`party_id`,`partner_id`,`received_by`,`totalcur`,`totalamount`,`discount_amount`,`netsale_amount`,`paidamount`,`Dueamount`,`profitamount`,`receiver_phone`,`remarks`,`port_id`,`warehouse_id`,`created_at`) VALUES ('$issue_id','$issue_date','$po_no','$payment_type','$party_id','$partner_id','$received_by','$total_cur','$total_amount','$discount_amount','$netsale_amount','$paid_amount','$due_amount','$profitamount','$receiver_phone','$remarks','$port_id','$warehouse_id','$issue_date')";
+			$query2 = "INSERT INTO `inv_issue` (`issue_id`,`issue_date`,`po_no`,`payment_type`,`party_id`,`partner_id`,`received_by`,`totalcur`,`totalamount`,`discount_amount`,`netsale_amount`,`paidamount`,`Dueamount`,`profitamount`,`receiver_phone`,`remarks`,`port_id`,`warehouse_id`,`salesexuctivename`,`se_id`,`created_at`) VALUES ('$issue_id','$issue_date','$po_no','$payment_type','$party_id','$partner_id','$received_by','$total_cur','$total_amount','$discount_amount','$netsale_amount','$paid_amount','$due_amount','$profitamount','$receiver_phone','$remarks','$port_id','$warehouse_id','$salesexuctivename','$se_id','$issue_date')";
 			$result2 = $conn->query($query2);
 			
 		

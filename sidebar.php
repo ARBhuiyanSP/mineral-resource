@@ -88,19 +88,21 @@
 	
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-text-width " aria-hidden="true" style="color: #ffffff;"></i>
-            <span>P2P Transfer</span>
+            <i class="fas fa-fw fa-ship " aria-hidden="true" style="color: #ffffff;"></i>
+            <span>Port Transfer</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="project_transfer.php"><i class="fa fa-plus" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Projects Transfer</span></a>
+            <a class="dropdown-item" href="port_transfer.php"><i class="fa fa-plus" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Transfer To Port</span></a>
+			
+			<a class="dropdown-item" href="port_to_site_transfer.php"><i class="fa fa-plus" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Transfer To Site</span></a>
             <!-- <a class="dropdown-item" href="warehousetransfer_entry.php"><i class="fa fa-plus" aria-hidden="true" style="color: #ffffff;"></i><span class="sub_menu_text_design">Warehouse Transfer</span></a> -->
             <a class="dropdown-item" href="p-transfer-list.php"><i class="fa fa-list" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Transfer List</span></a>
         </div>
     </li>
 	<li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-text-width " aria-hidden="true" style="color: #ffffff;"></i>
-            <span>P2P Return</span>
+            <i class="fas fa-fw fa-undo " aria-hidden="true" style="color: #ffffff;"></i>
+            <span>Port Return</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="project_return_entry.php"><i class="fa fa-plus" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Return Entry</span></a>
@@ -110,18 +112,18 @@
     </li>
     <li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            <i class="fas fa-fw fa-text-width " aria-hidden="true" style="color: #ffffff;"></i>
-            <span>S2S Transfer</span>
+            <i class="fas fa-fw fa-store " aria-hidden="true" style="color: #ffffff;"></i>
+            <span>Site Transfer</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="warehousetransfer_entry.php"><i class="fa fa-plus" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Site Transfer</span></a>
+            <a class="dropdown-item" href="site_to_site_transfer.php"><i class="fa fa-plus" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Site Transfer</span></a>
             <a class="dropdown-item" href="transfer-list.php"><i class="fa fa-list" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Transfer List</span></a>
         </div>
     </li>
 	<li class="nav-item dropdown">
         <a class="nav-link dropdown-toggle" href="#" id="pagesDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
             <i class="fas fa-fw fa-undo" aria-hidden="true" style="color: #ffffff;"></i>
-            <span>S2S Return</span>
+            <span>Site Return</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
             <a class="dropdown-item" href="return_entry.php"><i class="fa fa-plus" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Material return</span></a>

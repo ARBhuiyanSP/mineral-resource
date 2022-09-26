@@ -16,9 +16,9 @@ include 'header.php';
 					<tr>
 						<th>Issue ID</th>
 						<th>Issue Date</th>
-						<th>Project</th>
-						<th>To Site</th>
-					     <th>Action</th>
+						<th>From</th>
+						<th>Party Name</th>
+					    <th>Action</th>
 					</tr>
 				</thead>
 				<tbody>
@@ -40,23 +40,23 @@ include 'header.php';
 								<td><?php echo $item['issue_date']; ?></td>
 								<td>
 									<?php 
-									$dataresult =   getDataRowByTableAndId('projects', $item['project_id']);
+									$dataresult =   getDataRowByTableAndId('inv_warehosueinfo', $item['warehouse_id']);
 									echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : '');
 									?>
 								</td>
+								<td><?php echo $item['party_id']; ?></td>
 								<td>
-									<?php 
-									$dataresult =   getDataRowByTableAndId('inv_warehosueinfo', $item['to_warehouse_id']);
-									echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : '');
-									?>
-								</td>
-								<td>
-									<span><a class="action-icons c-approve" href="issue-view.php?no=<?php echo $item['issue_id']; ?>" title="View"><i class="fas fa-eye text-success"></i></a></span>
-									<span><a class="action-icons c-delete" href="issue_edit.php?edit_id=<?php echo $item['id']; ?>" title="edit"><i class="fa fa-edit text-info mborder"></i></a></span>
+									<span><a class="action-icons c-approve" href="issue-view.php?no=<?php echo $item['issue_id']; ?>" title="Invoice"><i class="fas fa-eye text-success"></i></a></span>
+									
+									<span><a class="" href="gate-pass.php?no=<?php echo $item['issue_id']; ?>" title="Gate Pass"><i class="fas fa-server text-danger"></i></a></span>
+									
+									<span><a class="action-icons" href="issue_edit.php?edit_id=<?php echo $item['id']; ?>" title="edit"><i class="fa fa-edit text-info"></i></a></span>
+									
 									<?php if($_SESSION['logged']['user_type'] == 'superAdmin') {?>
 										<span><a class="action-icons c-delete" href="issue_approve.php?issue=<?php echo $item['issue_id']; ?>" title="approve"><i class="fa fa-check text-info mborder"></i></a></span>
+										<span><a class="action-icons c-delete" href="#" title="delete"><i class="fa fa-trash text-danger"></i></a></span>
 										<?php } ?>
-							<span><a class="action-icons c-delete" href="#" title="delete"><i class="fa fa-trash text-danger"></i></a></span>
+								
 								</td>
 							</tr>
 							<?php
