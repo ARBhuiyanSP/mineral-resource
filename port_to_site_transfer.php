@@ -37,13 +37,13 @@
 										$result = mysqli_query($conn, $sql);
 										$row=mysqli_fetch_array($result);
 										$short_name = $row['short_name'];
-										$transferCode= 'WLP-T-'.$short_name;
+										$transferCode= 'P2-'.$short_name;
 									} else{
-										$transferCode= 'WLP-T-';
+										$transferCode= 'PT-';
 									}
 								?>
-								<input type="text" name="transfer_id" id="transfer_id" class="form-control" readonly="readonly" value="<?php echo getDefaultCategoryCodeByProjectT('inv_projectstransfer', 'transfer_id', '03d', '001', $transferCode) ?>">
-                                <input type="hidden" name="transfer_id" id="transfer_id" value="<?php echo getDefaultCategoryCodeByProjectT('inv_projectstransfer', 'transfer_id', '03d', '001', $transferCode) ?>">
+								<input type="text" name="port_transfer_id" id="port_transfer_id" class="form-control" readonly="readonly" value="<?php echo getDefaultCategoryCodeByPort('inv_port_transfer', 'port_transfer_id', '03d', '001', $transferCode) ?>">
+                                <input type="hidden" name="port_transfer_id" id="port_transfer_id" value="<?php echo getDefaultCategoryCodeByPort('inv_port_transfer', 'port_transfer_id', '03d', '001', $transferCode) ?>">
 							</div>
 						</div>
 						<div class="col-xs-4">

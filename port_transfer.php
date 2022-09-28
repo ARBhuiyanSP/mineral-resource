@@ -1,7 +1,6 @@
 <?php include 'header.php' ?>
 <!-- Left Sidebar End -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<link href="css/form-entry.css" rel="stylesheet">
+
 <!-- Left Sidebar End -->
 <div class="container-fluid">
     <!-- Breadcrumbs-->
@@ -24,7 +23,7 @@
 						<div class="col-xs-2">
 							<div class="form-group">
 								<label>Transfer Date</label>
-								<input type="text" autocomplete="off" name="transfer_date" id="transfer_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
+								<input type="text" autocomplete="off" name="port_transfer_date" id="port_transfer_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
 							</div>
 						</div>
 						<div class="col-xs-2">
@@ -37,13 +36,13 @@
 										$result = mysqli_query($conn, $sql);
 										$row=mysqli_fetch_array($result);
 										$short_name = $row['short_name'];
-										$transferCode= 'WLP-T-'.$short_name;
+										$transferCode= 'PT-'.$short_name;
 									} else{
-										$transferCode= 'WLP-T-';
+										$transferCode= 'PT-';
 									}
 								?>
-								<input type="text" name="transfer_id" id="transfer_id" class="form-control" readonly="readonly" value="<?php echo getDefaultCategoryCodeByProjectT('inv_projectstransfer', 'transfer_id', '03d', '001', $transferCode) ?>">
-                                <input type="hidden" name="transfer_id" id="transfer_id" value="<?php echo getDefaultCategoryCodeByProjectT('inv_projectstransfer', 'transfer_id', '03d', '001', $transferCode) ?>">
+								<input type="text" name="port_transfer_id" id="port_transfer_id" class="form-control" readonly="readonly" value="<?php echo getDefaultCategoryCodeByPort('inv_port_transfer', 'port_transfer_id', '03d', '001', $transferCode) ?>">
+                                <input type="hidden" name="port_transfer_id" id="port_transfer_id" value="<?php echo getDefaultCategoryCodeByPort('inv_port_transfer', 'port_transfer_id', '03d', '001', $transferCode) ?>">
 							</div>
 						</div>
 						<div class="col-xs-4">
@@ -107,7 +106,7 @@
 							<tbody>
 								<tr>
 									<td>
-                                            <select class="form-control select2" id="material_name" name="material_name[]" required onchange="getItemCodeByParam(this.value, 'inv_material', 'material_id_code', 'material_id0', 'qty_unit');">
+                                            <select class="form-control material_select_2" id="material_name" name="material_name[]" required onchange="getItemCodeByParam(this.value, 'inv_material', 'material_id_code', 'material_id0', 'qty_unit');">
                                                 <option value="">Select</option>
                                                 <?php
                                                 $projectsData = get_product_with_category();
@@ -157,7 +156,7 @@
 						<div class="col-xs-12">
 							<div class="form-group">
 								<div class="modal-footer">
-									<input type="submit" name="project_transfer_submit" id="submit" class="btn btn-block"  style="background-color:#007BFF;color:#ffffff;" value="SAVE" />
+									<input type="submit" name="port_transfer_submit" id="submit" class="btn btn-block"  style="background-color:#007BFF;color:#ffffff;" value="SAVE" />
 								</div>    
 							</div>
 						</div>
@@ -165,6 +164,7 @@
                 </form>
             </div>
             <!--here your code will go-->
+            <!--process section at transfer_process.php-->
         </div>
     </div>
 
@@ -175,7 +175,7 @@ var i=0;
 $(document).ready(function(){
     $('#add').click(function(){
         i++;
-        $('#dynamic_field').append('<tr id="row'+i+'"><td><select class="form-control select2" id="material_name' + i + '" name="material_name[]' + i + '" required onchange="getAppendItemCodeByParam(' + i + ",'inv_material'," + "'material_id_code'," + "'material_id'," + "'qty_unit'" + ')"><option value="">Select</option><?php
+        $('#dynamic_field').append('<tr id="row'+i+'"><td><select class="form-control material_select_2" id="material_name' + i + '" name="material_name[]' + i + '" required onchange="getAppendItemCodeByParam(' + i + ",'inv_material'," + "'material_id_code'," + "'material_id'," + "'qty_unit'" + ')"><option value="">Select</option><?php
                                                 $projectsData = get_product_with_category();
                                                 if (isset($projectsData) && !empty($projectsData)) {
                                                     foreach ($projectsData as $data) {
@@ -188,6 +188,7 @@ $(document).ready(function(){
                                                         ?><option value="<?php echo $data['id']; ?>"><?php echo $data['unit_name']; ?></option><?php }
                                                 }
                                                 ?></select></td><td><input type="text" name="material_total_stock[]" id="material_total_stock' + i + '" class="form-control" readonly></td><td><input type="text" name="quantity[]" id="quantity' + i + '" onchange="sum(0)"  onkeyup="check_stock_quantity_validation('+ i + ')" class="form-control" required></td><td><button type="button" name="remove" id="'+i+'" class="btn btn_remove" style="background-color:#f26522;color:#ffffff;">X</button></td></tr>');
+												$(".material_select_2").select2();
         $('#quantity' + i + ', #unit_price' + i).change(function () {
                 sum(i)
             });
@@ -216,7 +217,7 @@ $(document).ready(function(){
 </script>
 <script>
 	$(function() {
-	$("#transfer_date").datepicker({
+	$("#port_transfer_date").datepicker({
 			inline: true,
 			dateFormat:"yy-mm-dd",
 			yearRange:"-50:+10",

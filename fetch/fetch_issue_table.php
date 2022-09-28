@@ -1,6 +1,6 @@
 <?php
 //fetch.php
-include('connection/connect.php');
+include('../connection/connect.php');
 $column = array("inv_receive.id", "inv_receive.mrr_no", "inv_receive.mrr_date", "suppliers.name", "inv_receive.receive_total");
 $query = "
  SELECT * FROM inv_receive 

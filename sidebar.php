@@ -96,7 +96,7 @@
 			
 			<a class="dropdown-item" href="port_to_site_transfer.php"><i class="fa fa-plus" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Transfer To Site</span></a>
             <!-- <a class="dropdown-item" href="warehousetransfer_entry.php"><i class="fa fa-plus" aria-hidden="true" style="color: #ffffff;"></i><span class="sub_menu_text_design">Warehouse Transfer</span></a> -->
-            <a class="dropdown-item" href="p-transfer-list.php"><i class="fa fa-list" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Transfer List</span></a>
+            <a class="dropdown-item" href="port-transfer-list.php"><i class="fa fa-list" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Transfer List</span></a>
         </div>
     </li>
 	<li class="nav-item dropdown">

@@ -18,14 +18,14 @@
 							<th>
 								<select name="suppliers" id="suppliers" class="form-control">
 									<option value="">Supplier Search</option>
-										<?php 
-										$query = "SELECT * FROM suppliers ORDER BY name ASC";
-										$result = mysqli_query($conn, $query);
-										while($row = mysqli_fetch_array($result))
-										{
+									<?php 
+									$query = "SELECT * FROM suppliers ORDER BY name ASC";
+									$result = mysqli_query($conn, $query);
+									while($row = mysqli_fetch_array($result))
+									{
 										echo '<option value="'.$row["code"].'">'.$row["name"].'</option>';
-										}
-										?>
+									}
+									?>
 								</select>
 							</th>
 							<th>Total Qty</th>
@@ -53,7 +53,7 @@ $(document).ready(function(){
    "serverSide":true,
    "order":[],
    "ajax":{
-    url:"fetch_receive_table.php",
+    url:"fetch/fetch_receive_table.php",
     type:"POST",
     data:{is_suppliers:is_suppliers}
    },
