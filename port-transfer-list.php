@@ -47,8 +47,10 @@
 								</td>
 								<td>
 									<?php 
-									$dataresult =   getDataRowByTableAndId('ports', $item['to_port']);
-									echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : '');
+									if ($item['to_port']){
+										$dataresult =   getDataRowByTableAndId('ports', $item['to_port']);
+										echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : '');
+									}
 									?>
 								</td>
 								<td>

@@ -215,7 +215,7 @@ $(document).ready(function() {
 							if($_SESSION['logged']['user_type'] == 'admin') {
 								$sqlpmrr	=	"SELECT * FROM `inv_return` ";	
 							}else{
-								$sqlpmrr	=	"SELECT * FROM `inv_return` WHERE `warehouse_id`='$warehouse_id'";
+								$sqlpmrr	=	"SELECT * FROM `inv_return` WHERE `to_warehouse`='$warehouse_id'";
 							}
 							
 							$resultpmrr = mysqli_query($conn, $sqlpmrr);

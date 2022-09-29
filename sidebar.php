@@ -105,7 +105,7 @@
             <span>Port Return</span>
         </a>
         <div class="dropdown-menu" aria-labelledby="pagesDropdown">
-            <a class="dropdown-item" href="project_return_entry.php"><i class="fa fa-plus" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Return Entry</span></a>
+            <a class="dropdown-item" href="port_return_entry.php"><i class="fa fa-plus" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Return Entry</span></a>
             <!-- <a class="dropdown-item" href="warehousetransfer_entry.php"><i class="fa fa-plus" aria-hidden="true" style="color: #ffffff;"></i><span class="sub_menu_text_design">Warehouse Transfer</span></a> -->
             <a class="dropdown-item" href="project-return-list.php"><i class="fa fa-list" aria-hidden="true" style="color: #000;"></i><span class="sub_menu_text_design">Return List</span></a>
         </div>

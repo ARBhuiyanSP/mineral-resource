@@ -67,7 +67,18 @@ $transfer_id=$_GET['no']; ?>
 										<th>To Port:</th>
 										<td>
 											<?php 
-											$dataresult =   getDataRowByTableAndId('ports', $rowd['to_port']);
+											if($rowd['to_port']){
+												$dataresult =   getDataRowByTableAndId('ports', $rowd['to_port']);
+												echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : '');
+											}
+											?>
+										</td>
+									</tr>
+									<tr>
+										<th>To Site:</th>
+										<td>
+											<?php 
+											$dataresult =   getDataRowByTableAndId('inv_warehosueinfo', $rowd['to_warehouse']);
 											echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : '');
 											?>
 										</td>
