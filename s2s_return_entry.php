@@ -1,35 +1,33 @@
 <?php include 'header.php' ?>
 <!-- Left Sidebar End -->
-<script src="https://code.jquery.com/jquery-1.12.4.js"></script>
-<link href="css/form-entry.css" rel="stylesheet">
-<!-- Left Sidebar End -->
+
 <div class="container-fluid">
     <!-- Breadcrumbs-->
     <ol class="breadcrumb">
         <li class="breadcrumb-item">
             <a href="#">Dashboard</a>
         </li>
-        <li class="breadcrumb-item active">Overview</li>
+        <li class="breadcrumb-item active">Return Entry</li>
     </ol>
     <!-- DataTables Example -->
     <div class="card mb-3">
         <div class="card-header">
             <i class="fas fa-table"></i>
-            Site To Site Transfer Entry Form</div>
+            Return Entry Form</div>
         <div class="card-body">
             <!--here your code will go-->
-			<div class="form-group">
-                <form action="" method="post" name="add_name" id="transfer_entry_form" onsubmit="showFormIsProcessing('transfer_entry_form');">
+            <div class="form-group">
+                <form action="" method="post" name="add_issue" id="return_entry_form" onsubmit="showFormIsProcessing('return_entry_form');">
                     <div class="row" id="div1" style="">
-						<div class="col-xs-2">
-							<div class="form-group">
-								<label>Transfer Date</label>
-								<input type="text" autocomplete="off" name="transfer_date" id="transfer_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
-							</div>
-						</div>
-						<div class="col-xs-2">
-							<div class="form-group">
-								<label>Transfer No</label>
+                        <div class="col-xs-2">
+                            <div class="form-group">
+                                <label>Return Date</label>
+                                <input type="text" autocomplete="off" name="return_date" id="return_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
+                            </div>
+                        </div>
+                        <div class="col-xs-2">
+                            <div class="form-group">
+                                <label>Return No</label>
 								<?php if($_SESSION['logged']['user_type'] == 'whm')
 									{
 										$warehouse_id	=	$_SESSION['logged']['warehouse_id'];
@@ -37,25 +35,18 @@
 										$result = mysqli_query($conn, $sql);
 										$row=mysqli_fetch_array($result);
 										$short_name = $row['short_name'];
-										$transferCode= 'S2S-T-'.$short_name;
+										$returnCode= 'RTN-'.$short_name;
 									} else{
-										$transferCode= 'S2S-T-';
+										$returnCode= 'RTN-WL';
 									}
 								?>
-								<input type="text" name="transfer_id" id="transfer_id" class="form-control" readonly="readonly" value="<?php echo getDefaultCategoryCodeByProjectT('inv_projectstransfer', 'transfer_id', '03d', '001', $transferCode) ?>">
-                                <input type="hidden" name="transfer_id" id="transfer_id" value="<?php echo getDefaultCategoryCodeByProjectT('inv_projectstransfer', 'transfer_id', '03d', '001', $transferCode) ?>">
-							</div>
-						</div>
-						<!-- From Warehouse-->		
-						<?php  
-							$warehouse_id = $_SESSION['logged']['warehouse_id'];								
-							$dataresult =   getDataRowByTableAndId('inv_warehosueinfo', $warehouse_id);
-						?>
-						<!-- /From Warehouse-->	
-						
-						<div class="col-xs-4">
+                                <input type="text" name="return_id" id="return_id" class="form-control" value="<?php echo getDefaultCategoryCodeByWarehouseT('inv_return', 'return_id', '03d', '001', $returnCode) ?>">
+                                <input type="hidden" name="return_no" id="return_no" value="<?php echo getDefaultCategoryCodeByWarehouseT('inv_return', 'return_id', '03d', '001', $returnCode) ?>">
+                            </div>
+                        </div>
+                        <div class="col-xs-4">
 							<div class="form-group">
-								<label>From Site</label>
+								<label>To Site</label>
 								<?php  
 									$warehouse_id = $_SESSION['logged']['warehouse_id'];								
 									$dataresult =   getDataRowByTableAndId('inv_warehosueinfo', $warehouse_id);
@@ -73,7 +64,7 @@
 							
 						<div class="col-xs-4">
 							<div class="form-group">
-								<label for="id">To Site</label><span class="reqfield"> ***required</span>
+								<label for="id">From Site</label><span class="reqfield"> ***required</span>
 								<select class="form-control" id="main_sub_item_id" name="to_warehouse" onchange="getItemCodeByParam(this.value, 'inv_warehosueinfo', 'port_id', 'port_id');">
 									<option value="">Select</option>
 									<?php
@@ -93,11 +84,8 @@
 							</div>
 						</div>
 						<input type="hidden" name="to_port" id="port_id" class="form-control" readonly required>
-                           
-						
-						
-					</div>
-					<div class="row" id="div1"  style="">
+                    </div>
+                    <div class="row" id="div1"  style="">
 						<div class="table-responsive">
 							<table class="table table-bordered" id="dynamic_field">
 							<thead>
@@ -150,22 +138,23 @@
 							</table>
 						</div>
                     </div>
-					<div class="row" style="">
-						
-						<div class="col-xs-12">
-							<div class="form-group">
-								<label>Remarks</label>
-								<textarea id="remarks" name="remarks" class="form-control"></textarea>
-							</div>
-						</div>
-						<div class="col-xs-12">
-							<div class="form-group">
-								<div class="modal-footer">
-									<input type="submit" name="project_transfer_submit" id="submit" class="btn btn-block"  style="background-color:#007BFF;color:#ffffff;" value="SAVE" />
-								</div>    
-							</div>
-						</div>
-					</div>	 
+                    <div class="row" style="">
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <label>Remarks</label>
+                                <textarea id="remarks" name="remarks" class="form-control"></textarea>
+                            </div>
+                        </div>
+                        <div class="col-xs-12">
+                            <div class="form-group">
+                                <div class="modal-footer">
+                                    <input type="submit" name="return_submit" id="return_submit" class="btn btn-block" style="background-color:#007BFF;color:#ffffff;" value="Save" />
+                                </div>    
+                            </div>
+                        </div>
+                    </div>
+
+
                 </form>
             </div>
             <!--here your code will go-->
@@ -219,14 +208,36 @@ $(document).ready(function(){
     });
 </script>
 <script>
-	$(function() {
-	$("#transfer_date").datepicker({
-			inline: true,
-			dateFormat:"yy-mm-dd",
-			yearRange:"-50:+10",
-			changeYear: true,
-			changeMonth: true
-	});
-});
+    $(function () {
+        $("#issue_date").datepicker({
+            inline: true,
+            dateFormat: "yy-mm-dd",
+            yearRange: "-50:+10",
+            changeYear: true,
+            changeMonth: true
+        });
+    });
+</script>
+<script>
+    $(function () {
+        $("#challan_date").datepicker({
+            inline: true,
+            dateFormat: "yy-mm-dd",
+            yearRange: "-50:+10",
+            changeYear: true,
+            changeMonth: true
+        });
+    });
+</script>
+<script>
+    $(function () {
+        $("#requisition_date").datepicker({
+            inline: true,
+            dateFormat: "yy-mm-dd",
+            yearRange: "-50:+10",
+            changeYear: true,
+            changeMonth: true
+        });
+    });
 </script>
 <?php include 'footer.php' ?>

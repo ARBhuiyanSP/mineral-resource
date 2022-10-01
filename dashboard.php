@@ -37,7 +37,7 @@ $(document).ready(function() {
 					?>
 						<div class="mr-5"><?php echo $totalPendingMrr; ?> Total Material</div>
 					</div>
-					<a class="card-footer text-white clearfix small z-1" href="material.php">
+					<a class="card-footer text-white clearfix small z-1" href="materialinfo_report.php">
 					<span class="float-left">View Details</span>
 					<span class="float-right">
 						<i class="fas fa-angle-right"></i>
@@ -60,7 +60,7 @@ $(document).ready(function() {
 					?>
 						<div class="mr-5"><?php echo $totalPendingMrr; ?> Total Site</div>
 					</div>
-					<a class="card-footer text-white clearfix small z-1" href="#">
+					<a class="card-footer text-white clearfix small z-1" href="warehouse_entry.php">
 					<span class="float-left">View Details</span>
 					<span class="float-right">
 						<i class="fas fa-angle-right"></i>
@@ -84,7 +84,7 @@ $(document).ready(function() {
 					$resultpmrr = mysqli_query($conn, $sqlpmrr);
 					$totalPendingMrr = mysqli_num_rows($resultpmrr);
 					?>
-						<div class="mr-5"><?php echo $totalPendingMrr; ?> Received Count</div>
+						<div class="mr-5"><?php echo $totalPendingMrr; ?> Received</div>
 					</div>
 					<a class="card-footer text-white clearfix small z-1" href="receive-list.php">
 					<span class="float-left">View Details</span>
@@ -110,7 +110,7 @@ $(document).ready(function() {
 					$resultpmrr = mysqli_query($conn, $sqlpmrr);
 					$totalPendingMrr = mysqli_num_rows($resultpmrr);
 					?>
-						<div class="mr-5"><?php echo $totalPendingMrr; ?> Issue Count</div>
+						<div class="mr-5"><?php echo $totalPendingMrr; ?> Sales Order</div>
 					</div> 
 					<a class="card-footer text-white clearfix small z-1" href="issue-list.php">
 					<span class="float-left">View Details</span>
@@ -140,15 +140,15 @@ $(document).ready(function() {
 									<i class="fas fa-fw fa-truck"></i>
 								</div>
 							<?php
-								$sqlpmrr	=	"SELECT * FROM `inv_projectstransfer`";
+								$sqlpmrr	=	"SELECT * FROM `inv_port_transfer` WHERE `type`='p2p'";
 							
 							
 							$resultpmrr = mysqli_query($conn, $sqlpmrr);
 							$totalPendingMrr = mysqli_num_rows($resultpmrr);
 							?>
-								<div class="mr-5"><?php echo $totalPendingMrr; ?> - Project to Project Transfer Count</div>
+								<div class="mr-5"><?php echo $totalPendingMrr; ?> - Port to Port Transfer Count</div>
 							</div>
-							<a class="card-footer text-white clearfix small z-1" href="receive-list.php">
+							<a class="card-footer text-white clearfix small z-1" href="port-transfer-list.php">
 							<span class="float-left">View Details</span>
 							<span class="float-right">
 								<i class="fas fa-angle-right"></i>
@@ -157,21 +157,21 @@ $(document).ready(function() {
 						</div>
 					</div>
 					<div class="col-xl-12 col-sm-12 mb-4">
-						<div class="card text-white bg-info o-hidden h-100">
+						<div class="card text-white bg-danger o-hidden h-100">
 							<div class="card-body">
 								<div class="card-body-icon">
 									<i class="fas fa-fw fa-truck"></i>
 								</div>
 							<?php
-								$sqlpmrr	=	"SELECT * FROM `inv_transfermaster`";
+								$sqlpmrr	=	"SELECT * FROM `inv_port_transfer` WHERE `type`='p2s'";
 							
 							
 							$resultpmrr = mysqli_query($conn, $sqlpmrr);
 							$totalPendingMrr = mysqli_num_rows($resultpmrr);
 							?>
-								<div class="mr-5"><?php echo $totalPendingMrr; ?> Site to Site Transfer Count</div>
+								<div class="mr-5"><?php echo $totalPendingMrr; ?> Port to Site Transfer Count</div>
 							</div>
-							<a class="card-footer text-white clearfix small z-1" href="receive-list.php">
+							<a class="card-footer text-white clearfix small z-1" href="port-transfer-list.php">
 							<span class="float-left">View Details</span>
 							<span class="float-right">
 								<i class="fas fa-angle-right"></i>
@@ -180,22 +180,26 @@ $(document).ready(function() {
 						</div>
 					</div>
 					<div class="col-xl-12 col-sm-12 mb-4">
-						<div class="card text-white bg-info o-hidden h-100">
+						<div class="card text-white bg-success o-hidden h-100">
 							<div class="card-body">
 								<div class="card-body-icon">
 									<i class="fas fa-fw fa-truck"></i>
 								</div>
 							<?php
 							if($_SESSION['logged']['user_type'] == 'admin') {
-								$sqlpmrr	=	"SELECT * FROM `inv_consumption` ";	
+								$sqlpmrr = "SELECT SUM(`netsale_amount`) TotalSale FROM `inv_issue` WHERE `warehouse_id`='$warehouse_id'";								
 							}else{
-								$sqlpmrr	=	"SELECT * FROM `inv_consumption` WHERE `warehouse_id`='$warehouse_id'";
+								$sqlpmrr	=	"SELECT SUM(`netsale_amount`) TotalSale FROM `inv_issue` WHERE `warehouse_id`='$warehouse_id'";
 							}
 							
-							$resultpmrr = mysqli_query($conn, $sqlpmrr);
-							$totalPendingMrr = mysqli_num_rows($resultpmrr);
+							$resultpreinqty = mysqli_query($conn, $sqlpmrr);
+							$rowpreinqty = mysqli_fetch_object($resultpreinqty);
+							
+							if($rowpreinqty->TotalSale > 0){
+								$sale = $rowpreinqty->TotalSale;
+							}
 							?>
-								<div class="mr-5"><?php echo $totalPendingMrr; ?> Consumption Count</div>
+								<div class="mr-5"> Net Sale Amount : BDT - <?php echo $sale; ?></div>
 							</div>
 							<a class="card-footer text-white clearfix small z-1" href="issue-list.php">
 							<span class="float-left">View Details</span>
@@ -205,7 +209,7 @@ $(document).ready(function() {
 							</a>
 						</div>
 					</div>
-					<div class="col-xl-12 col-sm-12 mb-4">
+					<!--<div class="col-xl-12 col-sm-12 mb-4">
 						<div class="card text-white bg-info o-hidden h-100">
 							<div class="card-body">
 								<div class="card-body-icon">
@@ -231,7 +235,7 @@ $(document).ready(function() {
 							</a>
 						</div>
 					</div>
-					<!--
+					
 					<div class="col-xl-4 col-sm-6 mb-4">
 						<div class="card text-white bg-info o-hidden h-100">
 							<div class="card-body">
@@ -262,12 +266,13 @@ $(document).ready(function() {
 			</div>
 			<div class="col-xl-12 col-sm-12 mb-4">
 				<!----------------------------------Ajax Search------------------------------------------>
-				<!----------------------------------Ajax Search------------------------------------------>
+				<!----------------------------------Ajax Search-----------------------------------------
 				<script type="text/javascript" src="js/getData.js"></script>
 				
-						<h3>Materialwise Current Stock</h3>
+						<h5>Materialwise Current Stock</h5>
 				<div class="card">
 					<select class="form-control js-example-basic-single material_select_2" id="material">
+						<option value="">Select Material</option>
 						<?php
 						$projectsData = get_product_with_category();
 						if (isset($projectsData) && !empty($projectsData)) {
@@ -290,7 +295,7 @@ $(document).ready(function() {
 						<div class="row" id="no_records"><div class="col-sm-12" style="text-align:center;">Plese select Material to view current stock</div></div>
 					</div>	
 				</div>
-				<!----------------------------------Ajax Search------------------------------------------>
+				----------------------------------Ajax Search------------------------------------------>
 				<!----------------------------------Ajax Search------------------------------------------>
 					<!-- end receive search -->
 			</div>

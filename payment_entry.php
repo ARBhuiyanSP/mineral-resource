@@ -1,6 +1,20 @@
 <?php 
 include 'header.php';
 ?>
+<style>
+.bs-member-type 
+	{
+		display: none;
+	}
+show-fields 
+	{
+		display:block;   
+	}
+hidden-fields 
+	{
+		display:none;
+	}
+</style>
 <!-- Left Sidebar End -->
 <div class="container-fluid">
     <!-- Breadcrumbs-->
@@ -65,9 +79,10 @@ include 'header.php';
 						<div class="col-xs-2">
                             <div class="form-group">
                                 <label>Payment Type</label>
-                                <select name="paymenttype" id="paymenttype" class="form-control">
-									<option value="cash">Cash</option>
-									<option value="credit">Credit</option>
+								<select class="form-control" id="main_sub_item_id" name="mem_type">
+									<option value="">Select</option>
+									<option value="CASH">CASH</option>
+									<option value="BANK">BANK</option>
 								</select>
                             </div>
                         </div>
@@ -80,10 +95,34 @@ include 'header.php';
                                 <input type="text" name="amount" id="amount" class="form-control">
                             </div>
                         </div>
-						<div class="col-xs-6">
+						<!---------->
+						<!---------->
+						<div class="col-xs-2 bs-member-type"> 
+							<h2>Bank info</h2>
+						</div>
+						<div class="col-xs-2 bs-member-type">
+							<label for="reg_first_name">Bank Name</label>
+							<input type="text" class="form-control" name="first_name" id="reg_first_name" size="10" value="" />
+						</div>
+
+						<div class="col-xs-3 bs-member-type">
+							<label for="reg_last_name">Branch Name</label>
+							<input type="text" class="form-control" name="last_name" id="reg_last_name" size="10" value="" />
+						</div>
+						<div class="col-xs-3 bs-member-type">
+							<label for="reg_last_name">Cheque No</label>
+							<input type="text" class="form-control" name="last_name" id="reg_last_name" size="10" value="" />
+						</div>
+						<div class="col-xs-2 bs-member-type">
+							<label for="reg_last_name">Cheque date</label>
+							<input type="text" class="form-control" name="last_name" id="cheque_date" size="10" value="" />
+						</div>
+						<!---------->
+						<!---------->
+						<div class="col-xs-12">
                             <div class="form-group">
                                 <label>Remarks</label>
-								<textarea rows="5" name="remarks" id="remarks" class="form-control"></textarea>
+								<textarea rows="3" name="remarks" id="remarks" class="form-control"></textarea>
                             </div>
                         </div>
 						<div class="col-xs-3">
@@ -101,12 +140,6 @@ include 'header.php';
 								  };
 								  
 								</script>
-                            </div>
-                        </div>
-						<div class="col-xs-3">
-                            
-							<div style="border:1px solid gray;border-radius:5px;height:150px;width:150px;">
-								<img id="output" height="150px" width="150px"/>
                             </div>
                         </div>
 						
@@ -172,5 +205,46 @@ include 'header.php';
     </div>
 
 </div>
+<script>
+	$(function() {
+	$("#voucherdate").datepicker({
+			inline: true,
+			dateFormat:"yy-mm-dd",
+			yearRange:"-50:+10",
+			changeYear: true,
+			changeMonth: true
+	});
+});
+</script>
+
+<script>
+	$(function() {
+	$("#cheque_date").datepicker({
+			inline: true,
+			dateFormat:"yy-mm-dd",
+			yearRange:"-50:+10",
+			changeYear: true,
+			changeMonth: true
+	});
+});
+</script>
+<script>
+jQuery(document).ready(function($){
+  $('select[name=mem_type]').change(function () {
+        
+        
+    // hide all optional elements
+    $('.bs-member-type').css('display','none');   
+        
+    var $name = $(this).val();
+    
+    console.log($name);    
+    if($name == "BANK") {
+      $('.bs-member-type').css('display','block');
+    }
+
+  }); 
+});
+</script>
 <!-- /.container-fluid -->
 <?php include 'footer.php' ?>

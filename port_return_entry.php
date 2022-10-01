@@ -44,42 +44,49 @@
                                 <input type="hidden" name="return_no" id="return_no" value="<?php echo getDefaultCategoryCodeByWarehousePT('inv_project_return', 'return_id', '03d', '001', $returnCode) ?>">
                             </div>
                         </div>
-                        <div class="col-xs-2">
-                            <div class="form-group">
-                                <label>To Site/Warehouse</label>
-
-                                <?php
-                                $warehouse_id = $_SESSION['logged']['warehouse_id'];
-                                $dataresult = getDataRowByTableAndId('inv_warehosueinfo', $warehouse_id);
-                                ?>
-                                <input type="text" class="form-control" readonly="readonly" value="<?php echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : ''); ?>">
-
-                                <input type="hidden" name="to_warehouse" id="to_warehouse" class="form-control" readonly="readonly" value="<?php echo $warehouse_id; ?>">
-
-                            </div>
-                        </div>
-						<div class="col-xs-2">
-                            <div class="form-group">
-                                <label>To Project</label>
-
-                                <?php
-                                $project_id = $_SESSION['logged']['project_id'];
-                                $dataresult = getDataRowByTableAndId('projects', $project_id);
-                                ?>
-                                <input type="text" class="form-control" readonly="readonly" value="<?php echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : ''); ?>">
-
-                                <input type="hidden" name="to_project" id="to_project" class="form-control" readonly="readonly" value="<?php echo $project_id; ?>">
-
-                            </div>
-                        </div>
-						<div class="col-xs-3">
-                            <div class="form-group">
-                                <label>From Project</label>
-                                <select class="form-control" id="project_id" name="from_project" >
-                                    <option value="7">PCT</option>     
-                                </select>
-                            </div>
-                        </div>
+						<div class="col-xs-4">
+							<div class="form-group">
+								<label>To Port</label>
+								<?php  
+									$port_id = $_SESSION['logged']['port_id'];								
+									$dataresult =   getDataRowByTableAndId('ports', $port_id);
+								?>
+								<input type="text" class="form-control" readonly="readonly" value="<?php echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : ''); ?>">
+								<input type="hidden" name="to_port" id="to_port" class="form-control" readonly="readonly" value="<?php echo $_SESSION['logged']['port_id']; ?>">
+							</div>
+						</div>
+					
+						<!-- From Warehouse-->		
+						<?php  
+							$warehouse_id = $_SESSION['logged']['warehouse_id'];								
+							$dataresult =   getDataRowByTableAndId('inv_warehosueinfo', $warehouse_id);
+						?>
+						<!-- /From Warehouse-->	
+						<input type="hidden" name="to_warehouse" id="to_warehouse" class="form-control" readonly="readonly" value="<?php echo $_SESSION['logged']['warehouse_id']; ?>">
+						
+						<div class="col-xs-4">
+							<div class="form-group">
+								<label for="id">From Site</label><span class="reqfield"> ***required</span>
+								<select class="form-control" id="main_sub_item_id" name="from_warehouse" onchange="getItemCodeByParam(this.value, 'inv_warehosueinfo', 'port_id', 'port_id');">
+									<option value="">Select</option>
+									<?php
+									$warehouse_id = $_SESSION['logged']['warehouse_id'];
+									$parentCats = getTableDataByTableNameBySite('inv_warehosueinfo','','name');
+									if (isset($parentCats) && !empty($parentCats)) {
+										foreach ($parentCats as $pcat) {
+											if($warehouse_id == $pcat['id']){
+												$disable	= 'disabled';
+												}else{
+												$disable	= '';
+												}
+											?>
+											<option value="<?php echo $pcat['id'] ?>" <?php echo $disable; ?>><?php echo $pcat['name'] ?></option>
+										<?php }
+									} ?>
+								</select>
+							</div>
+						</div>
+						<input type="hidden" name="from_port" id="port_id" class="form-control" readonly required>
                         <!-- <div class="col-xs-3">
                             <div class="form-group">
                                 <label>From Project</label>
