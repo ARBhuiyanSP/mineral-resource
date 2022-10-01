@@ -49,7 +49,7 @@ $mrr_no=$_GET['no']; ?>
 							<div class="col-sm-6">	
 								<p>
 								<img src="images/Saif_Engineering_Logo_165X72.png" height="100px;"/>
-								<h5>E-engineering Ltd</h5><span>Mineral Resources Project</span></br></p></div>
+								<h5>Mineral Resources Project</h5><span></span></br></p></div>
 							<div class="col-sm-6">
 								<div class="row">
 									<div class="col-sm-3">MRR:</div>

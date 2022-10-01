@@ -112,7 +112,6 @@
                                 <th width="25%">Material Name<span class="reqfield"> ***required</span></th>
                                 <th width="10%">Material ID</th>
                                 <th width="10%">Unit</th>
-                                <th width="10%">Brand</th>
                                 <th width="10%">In Stock</th>
                                 <th width="10%">Qty<span class="reqfield"> ***required</span></th>
                                 <th width="5%"></th>
@@ -144,21 +143,6 @@
                                                     foreach ($projectsData as $data) {
                                                         ?>
                                                         <option value="<?php echo $data['id']; ?>"><?php echo $data['unit_name']; ?></option>
-                                                        <?php
-                                                    }
-                                                }
-                                                ?>
-                                            </select>
-                                        </td>
-                                        <td>
-                                            <select class="form-control" id="brand0" name="brand[]" readonly>
-                                                <option value="">Select Brand</option>
-                                                <?php
-                                                $brandData = getmaterialbrand();
-                                                if (isset($brandData) && !empty($brandData)) {
-                                                    foreach ($brandData as $data) {
-                                                        ?>
-                                                        <option value="<?php echo $data['brand_name']; ?>"><?php echo $data['brand_name']; ?></option>
                                                         <?php
                                                     }
                                                 }

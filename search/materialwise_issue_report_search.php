@@ -11,9 +11,8 @@
 </style>
 <div class="card mb-3">
     <div class="card-header">
-		<button class="btn btn-info linktext" onclick="window.location.href='issue_report.php'">Issue Report Search</button>
-		<button class="btn btn-success linktext"> Materialwise Issue Report </button>
-		<button class="btn btn-info linktext" onclick="window.location.href='typewise_issue_report.php'"> Typewise Movement Report </button>
+		<button class="btn btn-info linktext" onclick="window.location.href='issue_report.php'">Sales Order Report Search</button>
+		<button class="btn btn-success linktext"> Materialwise Sales Order Report </button>
 	</div>
     <div class="card-body">
         <form class="form-horizontal" action="" id="warehouse_stock_search_form" method="GET">
@@ -96,7 +95,7 @@ if(isset($_GET['submit'])){
 					<center>
 						<p>
 							<img src="images/Saif_Engineering_Logo_165X72.png" height="100px;"/><br>
-							<span>Material Issue Report</span><br>
+							<span>Material Sales Order Report</span><br>
 							<span><?php echo getDataRowByTableAndId('inv_material', $material_name)->material_description; ?></span><br>
 							From <span class="dtext"><?php echo date("jS F Y", strtotime($from_date));?></span> To  <span class="dtext"><?php echo date("jS F Y", strtotime($to_date));?> </span><br>
 						</p>
@@ -109,8 +108,8 @@ if(isset($_GET['submit'])){
 							<th>Material ID</th>
 							<th>Material Name</th>
 							<th>Unit</th>
-							<th>Issue QTY</th>
-							<th>Site</th>
+							<th>QTY</th>
+							<th>Party</th>
 						</tr>
 					</thead>
 					<tbody>
@@ -126,7 +125,7 @@ if(isset($_GET['submit'])){
 							{
 						?>
 						<tr style="background-color:#E9ECEF;">
-							<td>ISSUE No : <?php echo $row['issue_id']; ?></td>
+							<td>DO No : <?php echo $row['issue_id']; ?></td>
 							<td>Date : <?php echo date("jS F Y", strtotime($row['issue_date']));?></td>
 							<td colspan="4">From : <?php 
 								$warehouse_id = $row['warehouse_id'];
@@ -148,7 +147,7 @@ if(isset($_GET['submit'])){
 								$totalQty += $rowall['issue_qty'];
 								
 						?>
-						<tr>
+						<tr style="text-align:right;">
 							<td><?php echo $rowall['material_id']; ?></td>
 							<td><?php 
 								$mb_materialid = $rowall['material_id'];
@@ -161,14 +160,14 @@ if(isset($_GET['submit'])){
 							<td><?php echo getDataRowByTableAndId('inv_item_unit', $rowall['unit'])->unit_name; ?></td>
 							<td><?php echo $rowall['issue_qty']; ?></td>
 							<td><?php 
-											$dataresult =   getDataRowByTableAndId('inv_warehosueinfo', $rowall['to_warehouse_id']);
-											echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : '');
+											$dataresult =   getDataRowByTableAndId1('tb_party', $row['party_id']);
+											echo (isset($dataresult) && !empty($dataresult) ? $dataresult->partyname : '');
 										?></td>
 							
 							
 						</tr>
 						<?php } ?>
-						<tr>
+						<tr style="text-align:right;">
 							<td colspan="3" class="grand_total">Total:</td>
 							<td><?php echo $totalQty; ?></td>
 							<td></td>

@@ -41,15 +41,15 @@ $issue_id=$_GET['no']; ?>
 							<div class="col-sm-6">	
 								<p>
 								<img src="images/Saif_Engineering_Logo_165X72.png" height="100px;"/>
-								<h5>E-engineering Ltd</h5><span>Mineral Resources</span></br></p></div>
+								<h5>Mineral Resources</h5><span></span></br></p></div>
 							<div class="col-sm-6">
 								<table class="table table-bordered">
 									<tr>
-										<th>Issue ID:</th>
+										<th>DO ID:</th>
 										<td><?php echo $issue_id; ?></td>
 									</tr>
 									<tr>
-										<th>Issue Date:</th>
+										<th>DO Date:</th>
 										<td><?php
 										echo $rowd['issue_date'] ?></td>
 									</tr>
