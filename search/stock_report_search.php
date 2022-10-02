@@ -12,7 +12,6 @@
 	
 		<button class="btn btn-success linktext"> Stock Report Search</button>
 		<button class="btn btn-info linktext" onclick="window.location.href='categorywise_stock_report.php';"> Categorywise Stock Report </button>
-		<button class="btn btn-info linktext" onclick="window.location.href='typewise_stock_report.php';"> Typeywise Stock Report </button>
 		<?php if($_SESSION['logged']['user_type'] !== 'whm') {?>
 		<!-- <button class="btn btn-info linktext" onclick="window.location.href='total_stock_report.php';"> Total Stock Report</button> -->
 		<button class="btn btn-info linktext" onclick="window.location.href='site_stock_report.php';"> Site Stock Report </button>
