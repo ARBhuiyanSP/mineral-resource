@@ -6,7 +6,7 @@
             <span>Dashboard</span>
         </a>
     </li>
-	<?php if($_SESSION['logged']['user_type'] !== 'admin') {?>
+	<?php if($_SESSION['logged']['user_type'] !== 'superAdmin') {?>
 	<?php if($_SESSION['logged']['user_type'] !== 'superAdmin') {?>
     <li class="nav-item" style="background-color:#ffffff;">
         <span class="nav-link" href="#">
@@ -154,11 +154,7 @@
             <i class="fa fa-registered" aria-hidden="true" style="color: #ffffff;"></i>
             <span>Material List</span></a>
     </li>
-	<li class="nav-item">
-        <a class="nav-link" href="materialtype_info.php">
-            <i class="fa fa-registered" aria-hidden="true" style="color: #ffffff;"></i>
-            <span>TypeWise Material List</span></a>
-    </li>
+	
 	<li class="nav-item">
         <a class="nav-link" href="stock_report.php">
             <i class="fa fa-registered" aria-hidden="true" style="color: #ffffff;"></i>

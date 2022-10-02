@@ -40,9 +40,15 @@
 									} else{
 										$transferCode= 'PT-';
 									}
+									if($_SESSION['logged']['user_type'] == 'admin')
+									{
+										$vars	=	'getDefaultCategoryCode';
+									}else{
+										$vars	=	'getDefaultCategoryCodeByPort';
+									}
 								?>
-								<input type="text" name="port_transfer_id" id="port_transfer_id" class="form-control" readonly="readonly" value="<?php echo getDefaultCategoryCodeByPort('inv_port_transfer', 'port_transfer_id', '03d', '001', $transferCode) ?>">
-                                <input type="hidden" name="port_transfer_id" id="port_transfer_id" value="<?php echo getDefaultCategoryCodeByPort('inv_port_transfer', 'port_transfer_id', '03d', '001', $transferCode) ?>">
+								<input type="text" name="port_transfer_id" id="port_transfer_id" class="form-control" readonly="readonly" value="<?php echo $vars('inv_port_transfer', 'port_transfer_id', '03d', '001', $transferCode) ?>">
+                                <input type="hidden" name="port_transfer_id" id="port_transfer_id" value="<?php echo $vars('inv_port_transfer', 'port_transfer_id', '03d', '001', $transferCode) ?>">
 							</div>
 						</div>
 						<div class="col-xs-4">

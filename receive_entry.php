@@ -45,9 +45,16 @@
 									} else{
 										$mrrcode= 'MRR-WL';
 									}
+									
+									if($_SESSION['logged']['user_type'] == 'admin')
+									{
+										$vars	=	'getDefaultCategoryCode';
+									}else{
+										$vars	=	'getDefaultCategoryCodeByWarehouse';
+									}
 								?>
-                                <input type="text" name="mrr_no" id="mrr_no" class="form-control" value="<?php echo getDefaultCategoryCodeByWarehouse('inv_receive', 'mrr_no', '03d', '001', $mrrcode) ?>" readonly>
-                                <input type="hidden" name="receive_no" id="receive_no" value="<?php echo getDefaultCategoryCodeByWarehouse('inv_receive', 'mrr_no', '03d', '001', $mrrcode) ?>">
+                                <input type="text" name="mrr_no" id="mrr_no" class="form-control" value="<?php echo $vars('inv_receive', 'mrr_no', '03d', '001', $mrrcode) ?>" readonly>
+                                <input type="hidden" name="receive_no" id="receive_no" value="<?php echo $vars('inv_receive', 'mrr_no', '03d', '001', $mrrcode) ?>">
                             </div>
                         </div>
                         <div class="col-xs-2">
@@ -118,13 +125,13 @@
 								
 								<?php  
 									$warehouse_id = $_SESSION['logged']['warehouse_id'];								
-									$dataresult =   getDataRowByTableAndId('inv_warehosueinfo', $warehouse_id);
+									if($_SESSION['logged']['user_type'] != 'admin'){$dataresult =   getDataRowByTableAndId('inv_warehosueinfo', $warehouse_id);}
 								?>
-								<input type="text" class="form-control" readonly="readonly" value="<?php echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : ''); ?>">
+								<input type="text" class="form-control" readonly="readonly" value="<?php if($_SESSION['logged']['user_type'] == 'admin'){echo '';}else{echo (isset($dataresult) && !empty($dataresult) ? $dataresult->name : '');} ?>">
 								
-								<input type="hidden" name="port_id" id="port_id" class="form-control" readonly="readonly" value="<?php echo $_SESSION['logged']['port_id']; ?>">
+								<input type="hidden" name="port_id" id="port_id" class="form-control" readonly="readonly" value="<?php if($_SESSION['logged']['user_type'] == 'admin'){echo '';}else{echo $_SESSION['logged']['port_id'];} ?>">
 								
-								<input type="hidden" name="warehouse_id" id="warehouse_id" class="form-control" readonly="readonly" value="<?php echo $_SESSION['logged']['warehouse_id']; ?>">
+								<input type="hidden" name="warehouse_id" id="warehouse_id" class="form-control" readonly="readonly" value="<?php if($_SESSION['logged']['user_type'] == 'admin'){echo '';}else{echo $_SESSION['logged']['warehouse_id'];} ?>">
 								
                             </div>
                         </div>
