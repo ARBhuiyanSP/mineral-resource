@@ -200,10 +200,5 @@
             <i class="fa fa-registered" aria-hidden="true" style="color: #ffffff;"></i>
             <span>Return details</span></a>
     </li>
-	<li class="nav-item">
-        <a class="nav-link" href="inventory_sheet.php"> 
-            <i class="fa fa-registered" aria-hidden="true" style="color: #ffffff;"></i>
-            <span>Inventory Sheet</span></a>
-    </li>
 	
 </ul>
