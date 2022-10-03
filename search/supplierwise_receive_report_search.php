@@ -11,9 +11,7 @@
     <div class="card-header">
 		<button class="btn btn-info linktext" onclick="window.location.href='receive_report.php';"> Receive Report</button>
 		<button class="btn btn-success linktext"> Supplierwise Receive Report </button>
-		<button class="btn btn-info linktext" onclick="window.location.href='materialwise_receive_report.php'"> Materialwise Receive Report </button>
-		<button class="btn btn-info linktext" onclick="window.location.href='powise_receive_report.php'"> PO wise Receive Report </button>
-		<button class="btn btn-info linktext" onclick="window.location.href='typewise_receive_report.php'"> Typewise Receive Report </button>  
+		<button class="btn btn-info linktext" onclick="window.location.href='materialwise_receive_report.php'"> Materialwise Receive Report </button>  
 	</div>
 
     <div class="card-body">

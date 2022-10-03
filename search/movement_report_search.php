@@ -15,7 +15,6 @@
     <div class="card-header">
         <button class="btn btn-success linktext">Movement Report Search</button>
 		<button class="btn btn-info linktext" onclick="window.location.href='materialwise_movement_report.php'">Material Movement Report Search</button>
-		<button class="btn btn-info linktext" onclick="window.location.href='typewise_movement_report.php'"> Typewise Movement Report </button>
 		<button class="btn btn-info linktext" onclick="window.location.href='sitewise_movement_report.php'"> Sitewise Movement Report </button>
 		<button class="btn btn-info linktext" onclick="window.location.href='categorywise_movement_report.php'"> Categorywise Movement Report </button>
 	</div>

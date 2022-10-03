@@ -12,8 +12,6 @@
 		<button class="btn btn-success linktext"> Receive Report</button>
 		<button class="btn btn-info linktext" onclick="window.location.href='supplierwise_receive_report.php';"> Supplierwise Receive Report </button>
 		<button class="btn btn-info linktext" onclick="window.location.href='materialwise_receive_report.php'"> Materialwise Receive Report </button>
-		<button class="btn btn-info linktext" onclick="window.location.href='powise_receive_report.php'"> PO wise Receive Report </button>
-		<button class="btn btn-info linktext" onclick="window.location.href='typewise_receive_report.php'"> Typewise Receive Report </button>
 	</div>
     <div class="card-body">
         <form class="form-horizontal" action="" id="warehouse_stock_search_form" method="GET">

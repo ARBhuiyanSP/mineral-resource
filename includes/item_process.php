@@ -146,7 +146,7 @@ if(isset($_GET['process_type']) && $_GET['process_type'] == 'item'){
     $item_code          =   mysqli_real_escape_string($conn, $_POST['item_code']);
     $name               =   mysqli_real_escape_string($conn, $_POST['name']);
     $brand_name			=   mysqli_real_escape_string($conn, $_POST['brand_name']);
-    $type				=   mysqli_real_escape_string($conn, $_POST['type']);
+    //$type				=   mysqli_real_escape_string($conn, $_POST['type']);
     $qty_unit           =   mysqli_real_escape_string($conn, $_POST['qty_unit']);
     $material_min_stock =   mysqli_real_escape_string($conn, $_POST['material_min_stock']);
     // check duplicate:
@@ -164,11 +164,11 @@ if(isset($_GET['process_type']) && $_GET['process_type'] == 'item'){
     } else {
         if(isset($_POST['material_update_id']) && !empty($_POST['material_update_id'])){
             $edit_id     =   $_POST['material_update_id'];
-            $sql         = "UPDATE inv_material SET material_id_code='$item_code',material_id='$parent_id',material_sub_id='$sub_item_id',material_description='$name',brand_name='$brand_name',type='$type',material_min_stock='$material_min_stock',qty_unit='$qty_unit' WHERE id=$edit_id";
+            $sql         = "UPDATE inv_material SET material_id_code='$item_code',material_id='$parent_id',material_sub_id='$sub_item_id',material_description='$name',brand_name='$brand_name',material_min_stock='$material_min_stock',qty_unit='$qty_unit' WHERE id=$edit_id";
             $status      = 'success';
             $message     = 'Data have been successfully updated!';            
         }else{
-            $sql         = "INSERT INTO inv_material (material_id,material_sub_id,material_id_code,material_description,brand_name,type,material_min_stock,qty_unit) VALUES ('".$parent_id."','".$sub_item_id."', '".$item_code."','".$name."','".$brand_name."','".$type."', '".$material_min_stock."','".$qty_unit."')";
+            $sql         = "INSERT INTO inv_material (material_id,material_sub_id,material_id_code,material_description,brand_name,material_min_stock,qty_unit) VALUES ('".$parent_id."','".$sub_item_id."', '".$item_code."','".$name."','".$brand_name."', '".$material_min_stock."','".$qty_unit."')";
             $status      = 'success';
             $message     = 'Data have been successfully inserted!';
             
@@ -299,11 +299,11 @@ if(isset($_GET['process_type']) && $_GET['process_type'] == 'material_edit'){
                     <input type="text" class="form-control" id="edit_item_name" placeholder="brand name" name="brand_name" value="<?php if(isset($editData->brand_name)){ echo $editData->brand_name; } ?>">
                 </div>
             </div>
-			<div class="form-group">
+			<!--<div class="form-group">
                 <label class="control-label col-sm-5" for="name">Type:</label>
                 <div class="col-sm-7">
 					<select class="form-control" id="type" name="type">
-						<option value="<?php if(isset($editData->type)){ echo $editData->type; } ?>"><?php if(isset($editData->type)){ echo $editData->type; } ?></option>
+						<option value="<?php //if(isset($editData->type)){ echo $editData->type; } ?>"><?php if(isset($editData->type)){ echo $editData->type; } ?></option>
 						<option value="CIVIL">CIVIL</option>
 						<option value="ELECTRICAL">ELECTRICAL</option>
 						<option value="MACHANICAL">MACHANICAL</option>
@@ -311,7 +311,7 @@ if(isset($_GET['process_type']) && $_GET['process_type'] == 'material_edit'){
 						<option value="HARDWARE">HARDWARE</option>
 					</select>
                 </div>
-            </div>
+            </div> -->
             <div class="form-group">
                 <label class="control-label col-sm-5" for="parent_code">Unit:</label>
                 <div class="col-sm-7">

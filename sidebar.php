@@ -165,11 +165,11 @@
             <i class="fa fa-registered" aria-hidden="true" style="color: #ffffff;"></i>
             <span>Movement Reports</span></a>
     </li>
-	<li class="nav-item">
+	<!--<li class="nav-item">
         <a class="nav-link" href="consumption_report.php">
             <i class="fa fa-registered" aria-hidden="true" style="color: #ffffff;"></i>
             <span>Consumption Reports</span></a>
-    </li>
+    </li>-->
 	<li class="nav-item">
         <a class="nav-link" href="supplier_ledger.php">
             <i class="fa fa-registered" aria-hidden="true" style="color: #ffffff;"></i>
@@ -185,7 +185,7 @@
             <i class="fa fa-registered" aria-hidden="true" style="color: #ffffff;"></i>
             <span>Issue details</span></a>
     </li>
-	<li class="nav-item">
+	<!--<li class="nav-item">
         <a class="nav-link" href="s2stransfer_report.php">
             <i class="fa fa-registered" aria-hidden="true" style="color: #ffffff;"></i>
             <span>S2S Transfer details</span></a>
@@ -199,6 +199,6 @@
         <a class="nav-link" href="return_report.php">
             <i class="fa fa-registered" aria-hidden="true" style="color: #ffffff;"></i>
             <span>Return details</span></a>
-    </li>
+    </li> --->
 	
 </ul>
