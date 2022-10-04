@@ -24,7 +24,7 @@
 						<div class="col-xs-2">
 							<div class="form-group">
 								<label>Transfer Date</label>
-								<input type="text" autocomplete="off" name="transfer_date" id="transfer_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
+								<input type="text" autocomplete="off" name="site_transfer_date" id="transfer_date" class="form-control datepicker" value="<?php echo date('Y-m-d'); ?>">
 							</div>
 						</div>
 						<div class="col-xs-2">
@@ -42,8 +42,8 @@
 										$transferCode= 'S2S-T-';
 									}
 								?>
-								<input type="text" name="transfer_id" id="transfer_id" class="form-control" readonly="readonly" value="<?php echo getDefaultCategoryCodeByProjectT('inv_projectstransfer', 'transfer_id', '03d', '001', $transferCode) ?>">
-                                <input type="hidden" name="transfer_id" id="transfer_id" value="<?php echo getDefaultCategoryCodeByProjectT('inv_projectstransfer', 'transfer_id', '03d', '001', $transferCode) ?>">
+								<input type="text" name="site_transfer_id" id="port_transfer_id" class="form-control" readonly="readonly" value="<?php echo getDefaultCategoryCodeByWarehouseT('inv_port_transfer', 'port_transfer_id', '03d', '001', $transferCode) ?>">
+                                <input type="hidden" name="site_transfer_id" id="port_transfer_id" value="<?php echo getDefaultCategoryCodeByWarehouseT('inv_port_transfer', 'port_transfer_id', '03d', '001', $transferCode) ?>">
 							</div>
 						</div>
 						<!-- From Warehouse-->		
@@ -161,8 +161,9 @@
 						<div class="col-xs-12">
 							<div class="form-group">
 								<div class="modal-footer">
-									<input type="submit" name="project_transfer_submit" id="submit" class="btn btn-block"  style="background-color:#007BFF;color:#ffffff;" value="SAVE" />
-								</div>    
+									<input type="submit" name="site_to_site_transfer_submit" id="submit" class="btn btn-block"  style="background-color:#007BFF;color:#ffffff;" value="SAVE" />
+								</div> 
+								<!--process section at transfer_process.php-->								
 							</div>
 						</div>
 					</div>	 
