@@ -102,20 +102,20 @@ hidden-fields
 						</div>
 						<div class="col-xs-2 bs-member-type">
 							<label for="reg_first_name">Bank Name</label>
-							<input type="text" class="form-control" name="first_name" id="reg_first_name" size="10" value="" />
+							<input type="text" class="form-control" name="bank_name" id="reg_first_name" size="10" value="" />
 						</div>
 
 						<div class="col-xs-3 bs-member-type">
 							<label for="reg_last_name">Branch Name</label>
-							<input type="text" class="form-control" name="last_name" id="reg_last_name" size="10" value="" />
+							<input type="text" class="form-control" name="branch_name" id="reg_last_name" size="10" value="" />
 						</div>
 						<div class="col-xs-3 bs-member-type">
 							<label for="reg_last_name">Cheque No</label>
-							<input type="text" class="form-control" name="last_name" id="reg_last_name" size="10" value="" />
+							<input type="text" class="form-control" name="cheque_no" id="reg_last_name" size="10" value="" />
 						</div>
 						<div class="col-xs-2 bs-member-type">
 							<label for="reg_last_name">Cheque date</label>
-							<input type="text" class="form-control" name="last_name" id="cheque_date" size="10" value="" />
+							<input type="text" class="form-control" name="cheque_date" id="cheque_date" size="10" value="" />
 						</div>
 						<!---------->
 						<!---------->

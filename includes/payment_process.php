@@ -12,8 +12,14 @@ if (isset($_POST['payment_submit']) && !empty($_POST['payment_submit'])) {
         $voucherid	        = $_POST['voucherid'];
 		$voucherdate		= $_POST['voucherdate'];
 		$supplierid		    = $_POST['supplierid'];
-		$paymenttype		= $_POST['paymenttype'];
+		$paymenttype		= $_POST['mem_type'];
 		$amount		        = $_POST['amount'];
+		
+		$bank_name			= $_POST['bank_name'];
+		$branch_name		= $_POST['branch_name'];
+		$cheque_no			= $_POST['cheque_no'];
+		$cheque_date		= $_POST['cheque_date'];
+		
 	    $remarks		    = $_POST['remarks'];
 
 		if (is_uploaded_file($_FILES['sn_prt_image']['tmp_name'])) 
@@ -25,7 +31,7 @@ if (isset($_POST['payment_submit']) && !empty($_POST['payment_submit'])) {
 
 		
                
-        $query = "INSERT INTO `supplier_payment` (`voucherid`,`voucherdate`,`supplierid`,`paymenttype`,`amount`,`remarks`,`sp_photo`) VALUES ('$voucherid','$voucherdate','$supplierid','$paymenttype','$amount','$remarks','$sp_photo')";
+        $query = "INSERT INTO `supplier_payment` (`voucherid`,`voucherdate`,`supplierid`,`paymenttype`,`amount`,`bank_name`,`branch_name`,`cheque_no`,`cheque_date`,`remarks`,`sp_photo`) VALUES ('$voucherid','$voucherdate','$supplierid','$paymenttype','$amount','$bank_name','$branch_name','$cheque_no','$cheque_date','$remarks','$sp_photo')";
         $conn->query($query);
 		
 		

@@ -225,7 +225,7 @@ if(isset($_GET['submit'])){
 						<tr>
 							<th>Date</th>
 							<th>Ref no</th>
-							<th>Perticulars</th>
+							<th>Remarks</th>
 							<th>Debit</th>
 							<th>Credit</th>
 							<th>Balance</th>
@@ -233,8 +233,8 @@ if(isset($_GET['submit'])){
 					</thead>
 					<tbody>
 						<?php 
-							$sqlpreinqty = "SELECT SUM(`sb_cr_amount`)- SUM(`sb_dr_amount`) AS due FROM `inv_supplierbalance` WHERE `sb_supplier_id` = '$supplier_id' AND `warehouse_id`='$warehouse_id' AND `sb_date` < '$from_date'";
-							$sqlpreinqty = "SELECT SUM(`sb_cr_amount`)- SUM(`sb_dr_amount`) AS due FROM `inv_supplierbalance` WHERE `sb_supplier_id` = '$supplier_id' AND `warehouse_id`='$warehouse_id' AND `sb_date` < '$from_date'";
+							$sqlpreinqty = "SELECT SUM(`sb_cr_amount`)- SUM(`sb_dr_amount`) AS due FROM `inv_supplierbalance` WHERE `sb_supplier_id` = '$supplier_id' AND `sb_date` < '$from_date'";
+							$sqlpreinqty = "SELECT SUM(`sb_cr_amount`)- SUM(`sb_dr_amount`) AS due FROM `inv_supplierbalance` WHERE `sb_supplier_id` = '$supplier_id' AND `sb_date` < '$from_date'";
 							$resultpreinqty = mysqli_query($conn, $sqlpreinqty);
 							$rowpreinqty = mysqli_fetch_object($resultpreinqty);
 							
@@ -254,7 +254,7 @@ if(isset($_GET['submit'])){
 							<td><?php echo $opening_stock; ?></td>
 						</tr>
 						<?php
-							$sql	=	"SELECT * FROM `inv_supplierbalance` WHERE `sb_supplier_id`='$supplier_id' AND `warehouse_id`='$warehouse_id' AND `sb_date` BETWEEN '$from_date' AND '$to_date';";
+							$sql	=	"SELECT * FROM `inv_supplierbalance` WHERE `sb_supplier_id`='$supplier_id' AND `sb_date` BETWEEN '$from_date' AND '$to_date';";
 							$result = mysqli_query($conn, $sql);
 							$totaldebit = 0;
 							$totalcredit = 0;
@@ -277,7 +277,7 @@ if(isset($_GET['submit'])){
 							
 							<?php 
 							$adate			=	$row['sb_date'];
-							$sqlcredit 		=	"SELECT SUM(`sb_cr_amount`) AS tcredit FROM `inv_supplierbalance` WHERE `sb_supplier_id` = '$supplier_id' AND `warehouse_id`='$warehouse_id' AND `sb_date` < '$adate'";
+							$sqlcredit 		=	"SELECT SUM(`sb_cr_amount`) AS tcredit FROM `inv_supplierbalance` WHERE `sb_supplier_id` = '$supplier_id' AND `sb_date` < '$adate'";
 							$resultcredit 	= 	mysqli_query($conn, $sqlcredit);
 							$rowcredit 		=	mysqli_fetch_object($resultcredit);
 							$creditamount	=	$rowcredit->tcredit;
