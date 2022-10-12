@@ -10,9 +10,15 @@ if (isset($_POST['party_payment_submit']) && !empty($_POST['party_payment_submit
         $voucherid	        = $_POST['voucherid'];
 		$voucherdate		= $_POST['voucherdate'];
 		$party_id		    = $_POST['party_id'];
-		$paymenttype		= $_POST['paymenttype'];
+		$paymenttype		= $_POST['mem_type'];
 			
 		$amount		        = $_POST['amount'];
+		
+		$bank_name			= $_POST['bank_name'];
+		$branch_name		= $_POST['branch_name'];
+		$cheque_no			= $_POST['cheque_no'];
+		$cheque_date		= $_POST['cheque_date'];
+		
 	    $remarks		    = $_POST['remarks'];
 		$warehouse_id   	= $_POST['warehouse_id'];
 		$receivermode   	= $_POST['receivermode'];
@@ -23,7 +29,7 @@ if (isset($_POST['party_payment_submit']) && !empty($_POST['party_payment_submit
 				$edit_id            =   $_POST['edit_id']; 
 				//name="edit_id"  party_payment.php file
 				// UPDATE party_payment
-				$query2    = "UPDATE party_payment SET voucherid='$voucherid',voucherdate='$voucherdate',warehouse_id='$warehouse_id',partner_id='$partner_id',partyid='$party_id',paymenttype='$paymenttype',amount='$amount',remarks='$remarks',receivermode='$receivermode',updated_by='$entry_by' WHERE id=$edit_id";
+				$query2    = "UPDATE party_payment SET voucherid='$voucherid',voucherdate='$voucherdate',warehouse_id='$warehouse_id',partner_id='$partner_id',partyid='$party_id',paymenttype='$paymenttype',amount='$amount',bank_name='$bank_name',branch_name='$branch_name',cheque_no='$cheque_no',cheque_date='$cheque_date',remarks='$remarks',receivermode='$receivermode',updated_by='$entry_by' WHERE id=$edit_id";
 				$result2 = $conn->query($query2);
 				
 				// UPDATE inv_partybalance    //pb_dr_amount=0
@@ -36,7 +42,7 @@ if (isset($_POST['party_payment_submit']) && !empty($_POST['party_payment_submit
 				}else{
 				//INSERT  party_payment 
                
-					$query = "INSERT INTO `party_payment` (`voucherid`,`voucherdate`,`warehouse_id`,`partyid`,`paymenttype`,`amount`,`remarks`,`receivermode`,`entry_by`) VALUES ('$voucherid','$voucherdate','$warehouse_id','$party_id','$paymenttype','$amount','$remarks','$receivermode','$entry_by')";
+					$query = "INSERT INTO `party_payment` (`voucherid`,`voucherdate`,`warehouse_id`,`partyid`,`paymenttype`,`amount`,`bank_name`,`branch_name`,`cheque_no`,`cheque_date`,`remarks`,`receivermode`,`entry_by`) VALUES ('$voucherid','$voucherdate','$warehouse_id','$party_id','$paymenttype','$amount','$bank_name','$branch_name','$cheque_no','$cheque_date','$remarks','$receivermode','$entry_by')";
 					$conn->query($query);
 		
 					//INSERT  inv_partybalance 

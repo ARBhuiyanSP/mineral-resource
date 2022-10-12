@@ -137,20 +137,20 @@ hidden-fields
 						</div>
 						<div class="col-xs-2 bs-member-type">
 							<label for="reg_first_name">Bank Name</label>
-							<input type="text" class="form-control" name="first_name" id="reg_first_name" size="10" value="" />
+							<input type="text" class="form-control" name="bank_name" id="reg_first_name" size="10" value="" />
 						</div>
 
 						<div class="col-xs-3 bs-member-type">
 							<label for="reg_last_name">Branch Name</label>
-							<input type="text" class="form-control" name="last_name" id="reg_last_name" size="10" value="" />
+							<input type="text" class="form-control" name="branch_name" id="reg_last_name" size="10" value="" />
 						</div>
 						<div class="col-xs-3 bs-member-type">
 							<label for="reg_last_name">Cheque No</label>
-							<input type="text" class="form-control" name="last_name" id="reg_last_name" size="10" value="" />
+							<input type="text" class="form-control" name="cheque_no" id="reg_last_name" size="10" value="" />
 						</div>
 						<div class="col-xs-2 bs-member-type">
 							<label for="reg_last_name">Cheque date</label>
-							<input type="text" class="form-control" name="last_name" id="cheque_date" size="10" value="" />
+							<input type="text" class="form-control" name="cheque_date" id="cheque_date" size="10" value="" />
 						</div>
 						<!---------->
 						<!---------->
@@ -226,7 +226,8 @@ hidden-fields
 												<td>
 													<span><a class="action-icons c-approve" href="issue-view.php?no=<?php echo $item['issue_id']; ?>" title="View"><i class="fas fa-eye text-success"></i></a></span>
 													
-													<span><a class="action-icons c-approve" href="party_payment.php?id=<?php echo $item['id']; ?>" title="View"><i class="fas fa-edit text-info"></i></a></span>
+													<!-- <span><a class="action-icons c-approve" href="party_payment.php?id=<?php echo $item['id']; ?>" title="View"><i class="fas fa-edit text-info"></i></a></span> -->
+													<span><a class="action-icons c-approve" href="#" title="View"><i class="fas fa-edit text-info"></i></a></span>
 													
 											<span><a class="action-icons c-delete" href="#" title="delete"><i class="fa fa-trash text-danger"></i></a></span>
 												</td>
