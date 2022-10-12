@@ -178,12 +178,12 @@
 	<li class="nav-item">
         <a class="nav-link" href="receive_report.php">
             <i class="fa fa-registered" aria-hidden="true" style="color: #ffffff;"></i>
-            <span>Receive details</span></a>
+            <span>Receive Details</span></a>
     </li>
 	<li class="nav-item">
         <a class="nav-link" href="issue_report.php">
             <i class="fa fa-registered" aria-hidden="true" style="color: #ffffff;"></i>
-            <span>Issue details</span></a>
+            <span>Sales Details</span></a>
     </li>
 	<!--<li class="nav-item">
         <a class="nav-link" href="s2stransfer_report.php">
