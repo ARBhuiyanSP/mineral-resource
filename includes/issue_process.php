@@ -194,7 +194,8 @@ function getissueDataDetailsById($id){
     $receiveDetails =   "";
     
     // get receive data
-    $sql1           = "SELECT * FROM inv_issue where id=".$id;
+    //$sql1           = "SELECT * FROM inv_issue where id=".$id;
+    $sql1           = "SELECT * FROM inv_issue where issue_id='$id'";
     $result1        = $conn->query($sql1);
 
     if ($result1->num_rows > 0) {
